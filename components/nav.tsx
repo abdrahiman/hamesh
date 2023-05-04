@@ -8,13 +8,15 @@ export default function MyNav() {
   let [isDark, setDark] = useState(false);
   let [mbNav, setMbNav] = useState(false);
   let handleTheme = () => {
-    setDark((prv) => !prv);
     let html: any = document.querySelector(":root");
     if (isDark) {
-      html.className = "dark";
-    } else {
       html.className = "light";
+      localStorage.setItem("isDark", `false`);
+    } else {
+      html.className = "dark";
+      localStorage.setItem("isDark", `true`);
     }
+    setDark((prv) => !prv);
   };
   let [Scroll, setScroll] = useState(0);
   //window events
@@ -23,6 +25,17 @@ export default function MyNav() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   });
+  // get the theme from localstorage
+  useEffect(() => {
+    document.documentElement.lang = "ar";
+    if (localStorage.getItem("isDark") !== undefined) {
+      if (localStorage.getItem("isDark") === "true") {
+        setDark(true);
+      } else if (localStorage.getItem("isDark") === "false") {
+        setDark(false);
+      }
+    }
+  }, []);
   //event scroll
   const handleScroll = () => {
     setScroll(window ? window.scrollY : 0);
@@ -63,7 +76,9 @@ export default function MyNav() {
             </div>
           </Link>
           <p className="mr-2 font-medium">
-            {Scroll >= 100 && r.query.slug ? r.query.slug : ""}
+            {Scroll >= 100 && r.query.slug
+              ? r.query.slug.replaceAll("-", " ")
+              : ""}
           </p>
         </div>
         <div className="flex">

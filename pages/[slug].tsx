@@ -16,14 +16,14 @@ import javascript from "highlight.js/lib/languages/javascript";
 hljs.registerLanguage("javascript", javascript);
 
 export async function getServerSideProps(ctx: any) {
-  return { props: { postUrl: decodeURIComponent(`${ctx.resolvedUrl}`) } };
+  return { props: { slug: decodeURIComponent(`${ctx.query.slug}`) } };
 }
 export default function FullPost({ slug }: { slug: string }) {
   let {
     data: article,
     error,
     isLoading,
-  } = useSWR("/api/articles/" + slug, fetcher);
+  } = useSWR("/api/articles/article?slug=" + slug, fetcher);
 
   useEffect(() => {
     if (document.querySelector(".prview code") === undefined) return;
@@ -46,139 +46,27 @@ export default function FullPost({ slug }: { slug: string }) {
     });
   }, []);
   let r = useRouter();
-  // useEffect(() => {
-  //   // console.log(data?._id, post?.author?._id);
-  //   const elements = document.querySelectorAll("");
-  //   if (!elements) return;
-  //   const observer = new IntersectionObserver((entries, observer) => {
-  //     const entry = entries[0];
-  //     setH(entry.target.textContent);
-  //   });
-  //   elements.forEach((elem) => observer.observe(elem));
-  //   return () => observer?.disconnect();
-  // }, [post]);
-  return (
-    <Container
-      customMeta={{
-        title: article?.title || "",
-        description: article?.description || "",
-        type: "article",
-      }}
-      // date={new Date(frontMatter.publishedAt).toISOString()}
-    >
-      <PostHeader />
-      <article className="content">
-        <h2>المقدمة :</h2>
-        <p>
-          الـ JWT سيحتاج منك بعض لأشياء لكي ينشيء الـ token منها البيانات التي
-          تريد تشفيرها بالطبع والـ Secret، هي جملة تبتكرها لتكون لكلمة سر تستخدم
-          في التشفير لتزيد من قوة التشفير ويتحسن أن نعطيه تاريخ انتهاء صلاحية
-          هذا الـ token لضمان حماية المستخدم بشكل افضل، عن طريق انه يجدد الـ
-          token كل فترة
-        </p>
-        <pre>
-          <code
-            dangerouslySetInnerHTML={{
-              __html: `// backend
-const SECRET_KEY = 'هذه كلمة سر للتشفير بالغة السرية، لا تشاركها مع أحد';
-const token = jwt.sign(user, SECRET_KEY, {
-  expiresIn: 60 * 60 * 24, // 1 day
-});
 
-console.log(token);`,
-            }}
-          ></code>
-        </pre>
-        <h3>ثانيًا الـ payload</h3>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <img
-          src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2385af9c-2f88-4358-9ee7-063198224444%2FUntitled.png?table=block&id=28fb0b5c-1a1c-43cf-a05d-563a919e687d&cache=v2"
-          alt=""
-        />
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-        <p>
-          بعد ما عرفنا كيف يتكون الـ token الآن دعونا نعرف كيف نستعمله بشكل عملي
-          وكيف يكون الأمر في المشاريع الكبيرة الـ frontend سيستقبل بيانات
-          المستخدم ثم يرسلها للـ backend ثم يقوم الـ backend بعمل الـ token
-          ويرسلها للـ frontend يستقبل الـ frontend الـ token ويخزن في أي مكان في
-          المتصفح مثلا في session
-        </p>
-      </article>
-    </Container>
-  );
+  if (article) {
+    return (
+      <Container
+        customMeta={{
+          title: article.title || "",
+          description: article.description || "",
+          type: "article",
+        }}
+        // date={new Date(frontMatter.publishedAt).toISOString()}
+      >
+        <PostHeader art={article} />
+        <article
+          className="content w-full"
+          dangerouslySetInnerHTML={{
+            __html: article.content.replaceAll("h1", "h2"),
+          }}
+        ></article>
+      </Container>
+    );
+  } else {
+    return <div>Loading</div>;
+  }
 }

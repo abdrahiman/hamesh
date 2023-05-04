@@ -6,16 +6,18 @@ interface ITag {
   num: number;
   name: string;
 }
-export default function SearchBar() {
-  let [serchText, setSearch] = useState("");
+export default function SearchBar({
+  HandleChange,
+  inpText,
+}: {
+  HandleChange: any;
+  inpText: string;
+}) {
   let [tags, setTags] = useState<ITag[]>([
     { num: 0, name: "javascript" },
     { num: 4, name: "react" },
   ]);
-  let handleChange = (e: any) => {
-    console.log(r);
-    setSearch(e.target.value);
-  };
+
   let r = useRouter();
   return (
     <>
@@ -23,8 +25,8 @@ export default function SearchBar() {
         <input
           type="text"
           placeholder="ابحث داخل المدونة..."
-          value={serchText}
-          onChange={handleChange}
+          value={inpText}
+          onChange={HandleChange}
           className="w-full bg-white dark:bg-gray-600 shadow-md rounded-lg outline-none focus:shadow p-3"
         />
         <svg

@@ -1,44 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Container from "../../components/Container";
 import ENAV from "../../components/editor/nav";
 import MdEditor from "../../components/editor/mdEditor";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { EditorContext } from "../../context/edioreProvider";
+import { remark } from "remark";
+import html from "remark-html";
+import { toast } from "react-toastify";
+import Header from "../../components/editor/header";
 
 export default function Editor() {
   let r = useRouter();
   let { editorData, setEditorData } = useContext(EditorContext);
-  //upload a image to cloud
-  let handleUpload = async (e: any) => {
-    // setCover(null);
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "ilmamcdn");
-    let config: RequestInit = {
-      method: "POST",
-      body: data,
-    };
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dgvxswr30/image/upload",
-      config
-    );
-    const file = await res.json();
-    // setCover(file.secure_url);
-    // setEditorData((prv) => ({ ...prv, ["coverUrl"]: e.target.value }));
+  useEffect(() => {
+    if (!window) return;
+    window.addEventListener("beforeunload", handleClose);
+    return () => window.removeEventListener("beforeunload", handleClose);
+  }, []);
+  const handleClose = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
   };
   let handlePostArticle = async () => {
-    console.log({
-      ...editorData,
-      likes: 0,
-      slug: editorData.title.trim().replaceAll(" ", "-"),
-    });
+    const processedContent = await remark()
+      .use(html)
+      .process(editorData.markdown);
+    const contentHtml = processedContent.toString();
+    setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
+
     let req = await fetch("/api/articles", {
       method: "POST",
       body: JSON.stringify({
         ...editorData,
         likes: 0,
+        isDraft: false,
+        content: contentHtml,
         slug: editorData.title.trim().replaceAll(" ", "-"),
       }),
       headers: {
@@ -46,30 +43,50 @@ export default function Editor() {
       },
     });
     console.log(req);
+    // let data = await req.json();
+    if (!req.ok) {
+      toast.error("حدث خطأ ما");
+    } else {
+      toast.success("تم النشر بنجاح");
+    }
+  };
+
+  let handlePostDraft = async () => {
+    const processedContent = await remark()
+      .use(html)
+      .process(editorData.markdown);
+    const contentHtml = processedContent.toString();
+    setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
+
+    let req = await fetch("/api/articles", {
+      method: "POST",
+      body: JSON.stringify({
+        ...editorData,
+        likes: 0,
+        isDraft: true,
+        content: contentHtml,
+        slug: editorData.title.trim().replaceAll(" ", "-"),
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    console.log(req);
+    // let data = await req.json();
+    if (!req.ok) {
+      toast.error("حدث خطأ ما");
+    } else {
+      toast.success("تم النشر بنجاح");
+    }
   };
   return (
     <div className="editor">
       <ENAV />
       <Container>
-        <header className="w-full p-4 flex flex-col">
-          <div className="w-full mb-5">
-            <button className="px-4 covr py-1 font-medium rounded-lg transition">
-              Add a cover image
-            </button>
-          </div>
-          <input
-            type="text"
-            value={editorData.title}
-            onChange={(e) =>
-              setEditorData((prv: any) => ({ ...prv, title: e.target.value }))
-            }
-            placeholder="ادخل عنوانا مناسبا..."
-            className="w-full bg-transparent outline-none h-10 mb-5 text-4xl font-semibold"
-          />
-        </header>
+        <Header />
         <MdEditor />
         <footer className="my-6 w-full flex justify-between items-center">
-          <Link href={r.basePath} className="sc-cvbbAY hBPWbw">
+          <Link href={r.basePath} className=" hBPWbw">
             <div className="flex justify-between gap-2 px-6 py-2 hover:opacity-60 font-medium rounded-lg items-center transition">
               <svg
                 className="rotate-180"
@@ -102,7 +119,10 @@ export default function Editor() {
             </div>
           </Link>
           <div className="flex gap-4">
-            <button className="px-6 py-2 font-medium rounded-lg transition">
+            <button
+              className="px-6 py-2 font-medium rounded-lg transition"
+              onClick={handlePostDraft}
+            >
               احفظه كمسودة
             </button>
             <button

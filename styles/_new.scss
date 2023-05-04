@@ -175,4 +175,35 @@
       }
     }
   }
+  .tags-list {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    li {
+      background-color: #352e6193;
+      color: #aea3f7;
+      border-radius: 40px;
+      padding: 0.1rem 1rem;
+    }
+  }
+}
+.dashboard {
+  header {
+    button {
+      background-color: transparent;
+      border: 2px solid rgb(22, 22, 22);
+      &:hover {
+        background-color: rgba(61, 61, 61, 0.788);
+      }
+    }
+  }
+  // background-color: #1a1a1a;
+  // min-height: 100vh;
+  // color: white;
+  // nav {
+  //   .right-area {
+  //     color: white;
+  //   }
+  //   color: white;
+  // }
 }

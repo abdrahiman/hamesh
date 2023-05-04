@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Article from "../../../models/article";
 import dbConnect from "../../../utils/db";
 
-export default async function handle(
-  res: NextApiResponse,
-  req: NextApiRequest
+export default async function HANDLER(
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
   try {
     await dbConnect();
@@ -19,7 +19,7 @@ export default async function handle(
       return res.status(200).send(article);
     }
     if (req.method === "DELETE") {
-      let { id } = req.query;
+      let { id } = req.body;
       let article = await Article.findOneAndDelete({ _id: id });
       return res.status(200).send(article);
     }

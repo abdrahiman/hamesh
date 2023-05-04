@@ -1,8 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function ContentTable() {
   let [content, setCon] = useState(true);
-
+  let [hs, setH] = useState<[string] | []>([]);
+  useEffect(() => {
+    const elements = document.querySelectorAll("h2");
+    let data: [string] | [] = [];
+    elements.forEach((el: any) => {
+      let st: string = el.textContent || "";
+      el.id = st.replaceAll(" ", "-");
+      data.push(st);
+    });
+    setH(data);
+  }, []);
+  // useEffect(() => {
+  //   // console.log(data?._id, post?.author?._id);
+  //   const elements = document.querySelectorAll("h2");
+  //   if (!elements) return;
+  //   const observer = new IntersectionObserver((entries, observer) => {
+  //     const entry = entries[0];
+  //     setH(entry.target.textContent || "");
+  //   });
+  //   elements.forEach((elem) => observer.observe(elem));
+  //   return () => observer?.disconnect();
+  // }, [post]);
   return (
     <div className="flex flex-col gap-2 items-center w-full content-table">
       <div
@@ -32,62 +53,18 @@ function ContentTable() {
       </div>
       {content && (
         <>
-          <a
-            href="#ea09f944085f476abd506078877553ae"
-            className="notion-table-of-contents-item"
-          >
-            <span className="notion-table-of-contents-item-body inline-block mr-0">
-              快速部署
-            </span>
-          </a>
-          <a
-            href="#3680ac76a5204ffd944b728b466ca17f"
-            className="notion-table-of-contents-item"
-          >
-            <span className="notion-table-of-contents-item-body inline-block mr-0">
-              文章大纲
-            </span>
-          </a>
-          <a
-            href="#df4a979d89be496da9ea3a0d2b84f36e"
-            className="notion-table-of-contents-item"
-          >
-            <span className="notion-table-of-contents-item-body inline-block mr-0">
-              多语言
-            </span>
-          </a>
-          <a
-            href="#2e0b94f70d444b62b5308aa30888701d"
-            className="notion-table-of-contents-item"
-          >
-            <span className="notion-table-of-contents-item-body inline-block mr-0">
-              子页面和外部页面解析
-            </span>
-          </a>
-          <a
-            href="#e2784ed97898411dbf232c962d8f8272"
-            className="notion-table-of-contents-item"
-          >
-            <span className="notion-table-of-contents-item-body inline-block mr-0">
-              周刊 Newsletter
-            </span>
-          </a>
-          <a
-            href="#099510b380074392a092885200fd8aaf"
-            className="notion-table-of-contents-item"
-          >
-            <span className="notion-table-of-contents-item-body inline-block mr-0">
-              评论区
-            </span>
-          </a>
-          <a
-            href="#17e4a025c9194603bffeff8fe9d670ff"
-            className="notion-table-of-contents-item"
-          >
-            <span className="notion-table-of-contents-item-body inline-block mr-0">
-              联系表单
-            </span>
-          </a>
+          {hs &&
+            hs.map((el: any, i) => (
+              <a
+                key={i}
+                href={"#" + el.replaceAll(" ", "-")}
+                className="notion-table-of-contents-item"
+              >
+                <span className="notion-table-of-contents-item-body inline-block mr-0">
+                  {el}
+                </span>
+              </a>
+            ))}
         </>
       )}
     </div>

@@ -208,7 +208,19 @@ article.content {
     margin: 0.5rem 0px;
     direction: ltr;
     border-radius: 0.3rem;
-    padding: 1rem;
+    position: relative;
+    > button {
+      position: absolute;
+      right: 5px;
+      top: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      color: white;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
   h2,
   h3 {

@@ -85,7 +85,7 @@ const MdEditor = () => {
           autofocus: true,
           placeholder: "ابدأ الكتابة من هنا ...",
         }}
-        value={editorData.content || ""}
+        value={editorData.markdown || ""}
         events={{ renderLine: hanldle }}
         onChange={onChange}
       />

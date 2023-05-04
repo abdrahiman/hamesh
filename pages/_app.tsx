@@ -6,7 +6,7 @@ import { AppProps } from "next/app";
 import EditorProvider from "../context/edioreProvider";
 import "highlight.js/styles/night-owl.css";
 import "easymde/dist/easymde.min.css";
-
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 const variants = {
@@ -38,7 +38,10 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   const { asPath } = useRouter();
-
+  useEffect(() => {
+    document.body.className = "bg-day dark:bg-night";
+    document.querySelector(":root")?.setAttribute("lang", "ar");
+  });
   return (
     <SessionProvider session={session}>
       <EditorProvider>
