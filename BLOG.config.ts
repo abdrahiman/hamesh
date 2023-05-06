@@ -39,7 +39,7 @@ const BLOG = {
   },
   seo: {
     keywords: ["hamesh", "مدونة", "Abderrahim aneddam", "Arabic Blog"],
-    googleSiteVerification: "", // Remove the value or replace it with your own google site verification code
+    googleSiteVerification: "5EySfeUGoEZeYFK_SsE2qJD_ZcX4S9e_YmkrEtpZKZs", // Remove the value or replace it with your own google site verification code
   },
   analytics: {
     provider: "", // Currently we support Google Analytics, Ackee, Umami and Cloudflare Insights, please fill with 'ga' or 'ackee' or 'umami' or 'cf', leave it empty to disable it.
