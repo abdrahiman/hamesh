@@ -12,7 +12,7 @@ function SocailMedai() {
         href={BLOG.socialLink.instagram}
         rel="noreferrer"
       >
-        <IoLogoInstagram />
+        <IoLogoInstagram height={"1.2rem"} width="1.2rem" />
       </a>
       <a
         target="_blank"

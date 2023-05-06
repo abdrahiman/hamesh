@@ -20,7 +20,8 @@ const SEO = ({ meta }: { meta: any }) => {
   return (
     <Head>
       <title>{meta.title}</title>
-      {/* <meta content={BLOG.darkBackground} name='theme-color' /> */}
+      <meta content={BLOG.darkBackground} name="theme-color" />
+      <link rel="icon" href={BLOG.pagesIcon}></link>
       <meta name="robots" content="follow, index" />
       <meta charSet="UTF-8" />
       {BLOG.seo.googleSiteVerification && (

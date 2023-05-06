@@ -27,6 +27,7 @@ const BLOG = {
   showWeChatPay: true,
   previewImagesEnabled: true,
   autoCollapsedNavBar: true, // The automatically collapsed navigation bar
+  pagesIcon: "/logo.svg",
   urlCover: "regular", // the quality of the auto generated image ( raw > full > regular > "")
   ogImageGenerateHost: "og-zl.vercel.app", // The link to generate OG image, don't end with a slash
   unsplashApiKey: process.env.UNSPLASH_API, // The link to generate OG image, don't end with a slash
