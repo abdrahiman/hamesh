@@ -3,7 +3,7 @@ const BLOG = {
   ArTitle: "هامش",
   author: "Abderrahim",
   email: "abderrahimaneddam1@gmail.com",
-  link: "https:/hamesh.me",
+  link: "https://hamech.vercel.app",
   newsletter: "Notionic Weekly",
   description: "A static blog build on top of Notion and Next.js",
   lang: "ar-EG", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
