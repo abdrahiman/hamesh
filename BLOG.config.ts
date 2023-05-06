@@ -3,9 +3,9 @@ const BLOG = {
   ArTitle: "هامش",
   author: "Abderrahim",
   email: "abderrahimaneddam1@gmail.com",
-  link: "https://hamech.vercel.app",
+  link: "https://hamesh.vercel.app",
   newsletter: "Notionic Weekly",
-  description: "A static blog build on top of Notion and Next.js",
+  description: "هامش هي مدونة شخصية تهدف الى تقديم اغناء المحتوى العربي ",
   lang: "ar-EG", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   timezone: "Asia/Shanghai", // See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for all options.
   appearance: "auto", // ['light', 'dark', 'auto'],
@@ -38,7 +38,13 @@ const BLOG = {
     instagram: "https://instagram.com/iabderrahim",
   },
   seo: {
-    keywords: ["hamesh", "مدونة", "Abderrahim aneddam", "Arabic Blog"],
+    keywords: [
+      "hamesh",
+      "مدونة عربية",
+      "Abderrahim aneddam",
+      "hamesh Blog",
+      "مدونة هامش",
+    ],
     googleSiteVerification: "5EySfeUGoEZeYFK_SsE2qJD_ZcX4S9e_YmkrEtpZKZs", // Remove the value or replace it with your own google site verification code
   },
   analytics: {
