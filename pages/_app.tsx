@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import "moment/locale/ar";
 import Script from "next/script";
 import BLOG from "../BLOG.config";
+import dynamic from "next/dynamic";
+const Gtag = dynamic(() => import("../components/Gtag"), { ssr: false });
 
 const variants = {
   in: {
@@ -47,42 +49,46 @@ export default function App({
     document.querySelector(":root")?.setAttribute("lang", "ar");
   });
   return (
-    <SessionProvider session={session}>
-      <EditorProvider>
-        <Layout>
-          <AnimatePresence
-            initial={false}
-            mode="wait"
-            onExitComplete={() => window.scrollTo(0, 0)}
-          >
-            <motion.div
-              key={asPath}
-              variants={variants}
-              animate="in"
-              initial="out"
-              exit="out"
+    <>
+      <>
+        {BLOG.isProd && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${BLOG.analytics.gaConfig.measurementId}`}
+            />
+            <Script strategy="lazyOnload" id="ga">
+              {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${BLOG.analytics.gaConfig.measurementId}', {
+              page_path: window.location.pathname,
+            });`}
+            </Script>
+          </>
+        )}
+      </>
+      {BLOG.isProd && BLOG?.analytics?.provider === "ga" && <Gtag />}
+      <SessionProvider session={session}>
+        <EditorProvider>
+          <Layout>
+            <AnimatePresence
+              initial={false}
+              mode="wait"
+              onExitComplete={() => window.scrollTo(0, 0)}
             >
-              <Script
-                async
-                src={
-                  "https://www.googletagmanager.com/gtag/js?id=" +
-                  BLOG.analytics.gaConfig.measurementId
-                }
-              ></Script>
-              <Script id="google-analytics" strategy="afterInteractive">
-                {`
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){window.dataLayer.push(arguments);}
-                  gtag('js', new Date());
-
-                  gtag('config', '${BLOG.analytics.gaConfig.measurementId}');
-                `}
-              </Script>
-              <Component {...pageProps} />
-            </motion.div>
-          </AnimatePresence>
-        </Layout>
-      </EditorProvider>
-    </SessionProvider>
+              <motion.div
+                key={asPath}
+                variants={variants}
+                animate="in"
+                initial="out"
+                exit="out"
+              >
+                <Component {...pageProps} />
+              </motion.div>
+            </AnimatePresence>
+          </Layout>
+        </EditorProvider>
+      </SessionProvider>
+    </>
   );
 }

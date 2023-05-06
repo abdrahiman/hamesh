@@ -25,7 +25,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "pages/editor/index.jsx"
+    "pages/editor/index.jsx",
+    "lib/gtag.js"
   ],
   "exclude": ["node_modules"]
 }
