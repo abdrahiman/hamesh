@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import "moment/locale/ar";
+import Script from "next/script";
+import BLOG from "../BLOG.config";
 
 const variants = {
   in: {
@@ -60,6 +62,22 @@ export default function App({
               initial="out"
               exit="out"
             >
+              <Script
+                async
+                src={
+                  "https://www.googletagmanager.com/gtag/js?id=" +
+                  BLOG.analytics.gaConfig.measurementId
+                }
+              ></Script>
+              <Script id="google-analytics" strategy="afterInteractive">
+                {`
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){window.dataLayer.push(arguments);}
+                  gtag('js', new Date());
+
+                  gtag('config', '${BLOG.analytics.gaConfig.measurementId}');
+                `}
+              </Script>
               <Component {...pageProps} />
             </motion.div>
           </AnimatePresence>

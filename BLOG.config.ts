@@ -59,7 +59,7 @@ const BLOG = {
       token: "", // Like '{"token": "xxxxxxxxxxxxxxxxxx"}'
     },
     gaConfig: {
-      measurementId: "", // e.g: G-XXXXXXXXXX
+      measurementId: "G-0N1ZB5BW1W", // e.g: G-XXXXXXXXXX
     },
     umamiConfig: {
       scriptUrl: "", // The url of your Umami script
