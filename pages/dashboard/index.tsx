@@ -50,7 +50,10 @@ function Index() {
                     <img
                       alt=""
                       className="w-full h-full object-cover object-center absolute inset-0 opacity-100 group-hover:scale-110 transition duration-200"
-                      src="https://cdn.pixabay.com/photo/2022/01/25/16/55/iceberg-6966784__340.jpg"
+                      src={
+                        ar.coverUrl ||
+                        "https://cdn.pixabay.com/photo/2022/01/25/16/55/iceberg-6966784__340.jpg"
+                      }
                     />
                     <div className="block md-cover absolute inset-0"></div>
                     <button

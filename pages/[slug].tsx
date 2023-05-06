@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import ContentTable from "../components/post/contentTable";
+
 import Container from "../components/Container";
 import PostHeader from "../components/headers/postHeader";
 import { useRouter } from "next/router";
@@ -13,48 +12,51 @@ const fetcher = async (url: string | Request) => {
 // import Highlight.js and just the languages you need
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
+import { FullPostLoader } from "../components/loaders";
 hljs.registerLanguage("javascript", javascript);
 
 export async function getServerSideProps(ctx: any) {
   return { props: { slug: decodeURIComponent(`${ctx.query.slug}`) } };
 }
 export default function FullPost({ slug }: { slug: string }) {
+  let r = useRouter();
+
   let {
     data: article,
     error,
     isLoading,
   } = useSWR("/api/articles/article?slug=" + slug, fetcher);
+  // checke if the error is 404
 
   useEffect(() => {
-    if (document.querySelector(".prview code") === undefined) return;
+    if (!document.querySelector("code")) return;
     document.querySelectorAll("pre button.copy").forEach((el) => el.remove());
     document.querySelectorAll("code").forEach((c: any) => {
       c.setAttribute("className", "js");
       let Btn: any = document.createElement("button");
       Btn.className = "copy";
-      Btn.innerHTML = `<svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" className="w-8 h-8"><path d="M13 10.75h-1.25a2 2 0 0 0-2 2v8.5a2 2 0 0 0 2 2h8.5a2 2 0 0 0 2-2v-8.5a2 2 0 0 0-2-2H19"></path><path d="M18 12.25h-4a1 1 0 0 1-1-1v-1.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1.5a1 1 0 0 1-1 1ZM13.75 16.25h4.5M13.75 19.25h4.5"></path></svg>`;
+      Btn.innerHTML = `<svg fill="currentColor" viewBox="0 0 16 16" width="1em" version="1.1"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg>`;
       c.parentElement.appendChild(Btn);
       Btn.onclick = () => {
         navigator.clipboard.writeText(
           Btn.parentElement.firstElementChild.textContent
         );
-        console.log(Btn.parentElement.firstElementChild.textContent);
         Btn.classList.add("copied");
         setTimeout(() => Btn.classList.remove("copied"), 3000);
       };
       hljs.highlightElement(c);
     });
-  }, []);
-  let r = useRouter();
+  }, [article]);
 
-  if (article) {
+  if (article?.content) {
     return (
       <Container
         customMeta={{
-          title: article.title || "",
-          description: article.description || "",
+          title: article.title,
+          description: article.description,
           type: "article",
         }}
+        className="full-post"
         // date={new Date(frontMatter.publishedAt).toISOString()}
       >
         <PostHeader art={article} />
@@ -66,7 +68,19 @@ export default function FullPost({ slug }: { slug: string }) {
         ></article>
       </Container>
     );
-  } else {
-    return <div>Loading</div>;
+  }
+  if (!article?.content && !isLoading) {
+    return (
+      <Container>
+        <h1>an error went happend</h1>
+      </Container>
+    );
+  }
+  if (!article?.content && isLoading) {
+    return (
+      <Container>
+        <FullPostLoader />
+      </Container>
+    );
   }
 }

@@ -33,7 +33,6 @@ export default function EditorProvider({ children }: { children: any }) {
   useEffect(() => {
     if (!isLoad) return;
     localStorage.setItem("editorData", JSON.stringify(editorData));
-    console.log(editorData);
   }, [editorData]);
 
   return (

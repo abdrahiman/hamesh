@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FcPlus } from "react-icons/fc";
 import { IoIosAdd, IoMdClose, IoMdRemove } from "react-icons/io";
 import { EditorContext } from "../../context/edioreProvider";
+import GenerateImage from "../../utils/image-generate";
 
 function Header() {
   let { editorData, setEditorData } = useContext(EditorContext);
@@ -37,6 +38,7 @@ function Header() {
       setTag(true);
     }
   };
+
   return (
     <header className="w-full p-4 flex flex-col">
       <div className="w-full mb-5">
@@ -56,19 +58,30 @@ function Header() {
                   onInput={handleUpload}
                 />
               </button>
-              <button className="px-3 covr py-1 font-medium rounded-lg transition relative">
+              <button
+                className="px-3 covr py-1 font-medium rounded-lg transition relative"
+                onClick={() =>
+                  setEditorData((prv: any) => ({
+                    ...prv,
+                    coverUrl: "",
+                  }))
+                }
+              >
                 ازالة
               </button>
             </div>
           </div>
         ) : (
-          <button className="px-4 covr py-1 font-medium rounded-lg transition relative">
-            اضافة صورة الغلاف
-            <input
-              type="file"
-              className="absolute top-0 left-0 w-full h-full opacity-0 "
-            />
-          </button>
+          <>
+            <button className="px-4 covr py-1 font-medium rounded-lg transition relative">
+              اضافة صورة الغلاف
+              <input
+                type="file"
+                onInput={handleUpload}
+                className="absolute top-0 left-0 w-full h-full opacity-0 "
+              />
+            </button>
+          </>
         )}
       </div>
       <input

@@ -10,6 +10,7 @@ import html from "remark-html";
 import { toast } from "react-toastify";
 import Header from "../../components/editor/header";
 import useSWR from "swr";
+import Spinner from "../../components/spinner";
 const fetcher = async (url: string | Request) => {
   const res = await fetch(url);
   return res.json();
@@ -49,12 +50,16 @@ export default function Editor({ id }: { id: string }) {
     const contentHtml = processedContent.toString();
     setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
 
-    let req = await fetch("/api/articles", {
+    let req = await fetch("/api/articles/article", {
       method: "PUT",
       body: JSON.stringify({
-        ...editorData,
-        content: contentHtml,
-        slug: editorData.title.trim().replaceAll(" ", "-"),
+        id,
+        articleData: {
+          ...editorData,
+          content: contentHtml,
+          isDraft: false,
+          slug: editorData.title.trim().replaceAll(" ", "-"),
+        },
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -65,7 +70,18 @@ export default function Editor({ id }: { id: string }) {
     if (!req.ok) {
       toast.error("حدث خطأ ما");
     } else {
-      toast.success("تم النشر بنجاح");
+      toast.success("تم التعديل بنجاح");
+
+      localStorage.removeItem("editorData");
+      setEditorData({
+        title: "",
+        content: "",
+        markdown: "",
+        isDraft: true,
+        description: "",
+        coverUrl: "",
+        tags: [],
+      });
     }
   };
 
@@ -76,14 +92,16 @@ export default function Editor({ id }: { id: string }) {
     const contentHtml = processedContent.toString();
     setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
 
-    let req = await fetch("/api/articles", {
+    let req = await fetch("/api/articles/article", {
       method: "PUT",
       body: JSON.stringify({
-        ...editorData,
-        likes: 0,
-        isDraft: true,
-        content: contentHtml,
-        slug: editorData.title.trim().replaceAll(" ", "-"),
+        id,
+        articleData: {
+          ...editorData,
+          isDraft: true,
+          content: contentHtml,
+          slug: editorData.title.trim().replaceAll(" ", "-"),
+        },
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -94,28 +112,15 @@ export default function Editor({ id }: { id: string }) {
     if (!req.ok) {
       toast.error("حدث خطأ ما");
     } else {
-      toast.success("تم النشر بنجاح");
+      toast.success("تم التعديل بنجاح");
     }
   };
   if (isLoad) {
-    return (
-      <div className="">
-        <div className="w-full h-screen flex items-center justify-center">
-          <div
-            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-            role="status"
-          >
-            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-              Loading...
-            </span>
-          </div>
-        </div>
-      </div>
-    );
+    return <Spinner />;
   } else if (err) {
     return (
       <Container>
-        <h1 className="mt-12">An error went happend</h1>
+        <h1 className="mt-12">حذث خطأ ما</h1>
       </Container>
     );
   } else {
@@ -126,7 +131,7 @@ export default function Editor({ id }: { id: string }) {
           <Header />
           <MdEditor />
           <footer className="my-6 w-full flex justify-between items-center">
-            <Link href={r.basePath} className="sc-cvbbAY hBPWbw">
+            <Link href={"/dashboard"} className="">
               <div className="flex justify-between gap-2 px-6 py-2 hover:opacity-60 font-medium rounded-lg items-center transition">
                 <svg
                   className="rotate-180"
@@ -155,7 +160,7 @@ export default function Editor({ id }: { id: string }) {
                     </g>
                   </g>
                 </svg>
-                <div className="sc-brqgnP cZmzeX">حفظ و الرجوع</div>
+                <div className="">حفظ و الرجوع</div>
               </div>
             </Link>
             <div className="flex gap-4">
@@ -163,13 +168,13 @@ export default function Editor({ id }: { id: string }) {
                 className="px-6 py-2 font-medium rounded-lg transition"
                 onClick={handleUpdateDraft}
               >
-                احفظه كمسودة
+                احفظ تعديل كمسودة
               </button>
               <button
                 onClick={handleUpdateArticle}
                 className="px-8 py-2 font-medium vbg rounded-lg transition"
               >
-                نشر المقال
+                تعديل المقال
               </button>
             </div>
           </footer>

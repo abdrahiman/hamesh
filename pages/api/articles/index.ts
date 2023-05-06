@@ -1,20 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import BLOG from "../../../BLOG.config";
 import Article from "../../../models/article";
 import dbConnect from "../../../utils/db";
+import GenerateImage from "../../../utils/image-generate";
 export default async function HANDLER(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("good");
   try {
     await dbConnect();
   } catch (er) {
-    console.log(er);
+    return res.status(500).json({ error: er });
   }
   try {
     if (req.method === "GET") {
       // get posts and sort by time
-      let lm = req.query.limit || 32;
+      let lm = req.query.limit || BLOG.postsPerPage;
       let all = req.query.all;
       if (all) {
         const articles = await Article.find({})
@@ -33,7 +34,6 @@ export default async function HANDLER(
         })
           .sort({ createdAt: -1 })
           .limit(+lm);
-        console.log(tagSearch);
         return res.status(201).json({ data: articles });
       }
       let querySearch = req.query.q;
@@ -59,6 +59,18 @@ export default async function HANDLER(
       return res.status(201).json({ data: articles });
     } else if (req.method === "POST") {
       let articleData = req.body;
+      if (articleData.coverUrl == "") {
+        let image = await GenerateImage();
+        if (BLOG.urlCover == "full") {
+          articleData.coverUrl = image.urls.full;
+        } else if (BLOG.urlCover == "raw") {
+          articleData.coverUrl = image.urls.raw;
+        } else if (BLOG.urlCover == "regular") {
+          articleData.coverUrl = image.urls.regular;
+        } else {
+          articleData.coverUrl = BLOG.defaultCover;
+        }
+      }
       let newArticle = new Article({
         ...articleData,
       });
@@ -67,7 +79,6 @@ export default async function HANDLER(
     }
     return res.status(404).end();
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: err });
   }
 }

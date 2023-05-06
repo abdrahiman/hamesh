@@ -6,10 +6,12 @@ function Container({
   children,
   fullWidth,
   customMeta,
+  className,
 }: {
   children: any;
   fullWidth?: boolean;
   customMeta?: {};
+  className?: string;
 }) {
   const meta = {
     title: "Hamish",
@@ -22,7 +24,7 @@ function Container({
       <main
         className={`m-auto flex-grow w-full transition-all flex h-full justify-center flex-col items-center ${
           !fullWidth ? "max-w-3xl px-4 mx-auto" : "px-4 md:px-24"
-        }`}
+        } ${!className ? "" : className}`}
       >
         {children}
       </main>

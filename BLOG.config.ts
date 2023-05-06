@@ -14,7 +14,7 @@ const BLOG = {
   darkBackground: "#212936", // use hex value, don't forget '#'
   path: "", // leave this empty unless you want to deploy Notionic in a folder
   since: 2023, // If leave this empty, current year will be used.
-  postsPerPage: 10,
+  postsPerPage: 15,
   sortByDate: true,
   pagesShow: {
     newsletter: true,
@@ -26,13 +26,15 @@ const BLOG = {
   },
   showWeChatPay: true,
   previewImagesEnabled: true,
-  autoCollapsedNavBar: false, // The automatically collapsed navigation bar
+  autoCollapsedNavBar: true, // The automatically collapsed navigation bar
+  urlCover: "regular", // the quality of the auto generated image ( raw > full > regular > "")
   ogImageGenerateHost: "og-zl.vercel.app", // The link to generate OG image, don't end with a slash
+  unsplashApiKey: process.env.UNSPLASH_API, // The link to generate OG image, don't end with a slash
   defaultCover: "/cover.jpg",
   socialLink: {
-    twitter: "https://twitter.com/izuolan",
-    github: "https://github.com/AbderrahimOne",
-    instagram: "https://instagram.com/zuolan",
+    twitter: "https://twitter.com/iabderrahim",
+    github: "https://github.com/iabderrahim",
+    instagram: "https://instagram.com/iabderrahim",
   },
   seo: {
     keywords: ["hamesh", "مدونة", "Abderrahim aneddam", "Arabic Blog"],

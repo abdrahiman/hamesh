@@ -9,6 +9,8 @@ import "easymde/dist/easymde.min.css";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
+import "moment/locale/ar";
+
 const variants = {
   in: {
     opacity: 1,

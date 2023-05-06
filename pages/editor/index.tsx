@@ -48,6 +48,16 @@ export default function Editor() {
       toast.error("حدث خطأ ما");
     } else {
       toast.success("تم النشر بنجاح");
+      localStorage.removeItem("editorData");
+      setEditorData({
+        title: "",
+        content: "",
+        markdown: "",
+        isDraft: true,
+        description: "",
+        coverUrl: "",
+        tags: [],
+      });
     }
   };
 
@@ -86,7 +96,7 @@ export default function Editor() {
         <Header />
         <MdEditor />
         <footer className="my-6 w-full flex justify-between items-center">
-          <Link href={r.basePath} className=" hBPWbw">
+          <Link href={"/dashboard"} className="">
             <div className="flex justify-between gap-2 px-6 py-2 hover:opacity-60 font-medium rounded-lg items-center transition">
               <svg
                 className="rotate-180"
@@ -115,7 +125,7 @@ export default function Editor() {
                   </g>
                 </g>
               </svg>
-              <div className="sc-brqgnP cZmzeX">حفظ و الرجوع</div>
+              <div className="">حفظ و الرجوع</div>
             </div>
           </Link>
           <div className="flex gap-4">

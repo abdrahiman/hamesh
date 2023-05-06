@@ -3,6 +3,7 @@ import Link from "next/link";
 import SocailMedai from "./socailMedai";
 import { useRouter } from "next/router";
 import MbNav from "./ui/mbNav";
+import BLOG from "../BLOG.config";
 
 export default function MyNav() {
   let [isDark, setDark] = useState(false);
@@ -28,17 +29,22 @@ export default function MyNav() {
   // get the theme from localstorage
   useEffect(() => {
     document.documentElement.lang = "ar";
+    let html: any = document.querySelector(":root");
     if (localStorage.getItem("isDark") !== undefined) {
       if (localStorage.getItem("isDark") === "true") {
         setDark(true);
+        html.className = "dark";
       } else if (localStorage.getItem("isDark") === "false") {
         setDark(false);
+        html.className = "light";
       }
     }
   }, []);
   //event scroll
   const handleScroll = () => {
-    setScroll(window ? window.scrollY : 0);
+    if (BLOG.autoCollapsedNavBar) {
+      setScroll(window ? window.scrollY : 0);
+    }
     let el = document.querySelector(".content-table");
     let af = document.querySelector(".full-post");
     if (!af || !el) return;
@@ -49,6 +55,7 @@ export default function MyNav() {
     }
   };
   let r = useRouter();
+  let slug: any = r.query.slug || "";
   return (
     <>
       <div className="observer-element h-4 md:h-12"></div>
@@ -76,9 +83,7 @@ export default function MyNav() {
             </div>
           </Link>
           <p className="mr-2 font-medium">
-            {Scroll >= 100 && r.query.slug
-              ? r.query.slug.replaceAll("-", " ")
-              : ""}
+            {Scroll >= 100 && slug ? slug.replaceAll("-", " ") : ""}
           </p>
         </div>
         <div className="flex">
@@ -99,8 +104,8 @@ export default function MyNav() {
                     className="inline-block mb-1 h-5 w-5"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                       d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                     ></path>
@@ -121,8 +126,8 @@ export default function MyNav() {
                     className="inline-block mb-1 h-5 w-5"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                       d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
                     ></path>
@@ -143,8 +148,8 @@ export default function MyNav() {
                     className="inline-block mb-1 h-5 w-5"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                       d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     ></path>
@@ -165,8 +170,8 @@ export default function MyNav() {
                     className="inline-block mb-1 h-5 w-5"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                       d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
                     ></path>
@@ -191,8 +196,8 @@ export default function MyNav() {
                     className="inline-block mb-1 h-5 w-5"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     ></path>
@@ -217,8 +222,8 @@ export default function MyNav() {
                 className="h-5 w-5"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   strokeWidth="2"
                   d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                 ></path>
@@ -238,8 +243,8 @@ export default function MyNav() {
                   className="h-5 w-5"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     strokeWidth="2"
                     d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
                   ></path>

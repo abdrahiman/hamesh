@@ -8,7 +8,8 @@ import useSwr from "swr";
 import React, { useState } from "react";
 import { IoLogoGithub, IoLogoTwitter } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
+import Spinner from "../components/spinner";
 
 export async function getServerSideProps(context: any) {
   const { req } = context;
@@ -22,7 +23,9 @@ export async function getServerSideProps(context: any) {
 interface IAuth {
   providers: {};
 }
-const Auth = async ({ providers }: IAuth) => {
+
+// dont make a commponnent function async
+const Auth = ({ providers }: IAuth) => {
   let [loading, setLod] = useState<string>("");
   let authButton = async (id: string) => {
     setLod(id);
@@ -32,9 +35,13 @@ const Auth = async ({ providers }: IAuth) => {
     setLod("");
   };
   let { data: user, isLoading, error } = useSwr("/api/getUser", fetcher);
+  if (isLoading && !user) {
+    return <Spinner />;
+  }
+
   return (
     <div className="auth flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      {!user ? (
+      {!user?.email ? (
         <div className="w-full flex flex-col items-center max-w-md gap-6">
           <div className="flex flex-col items-center gap-8 ">
             <img src="/favicon.ico" alt="" className="h-12" />
@@ -70,8 +77,6 @@ const Auth = async ({ providers }: IAuth) => {
               }
             })}
         </div>
-      ) : isLoading ? (
-        <div>Loading</div>
       ) : (
         <div className="w-full flex flex-col items-center max-w-md gap-6">
           <div className="flex flex-col items-center gap-8 ">

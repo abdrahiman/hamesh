@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import useSWR from "swr";
+const fetcher = async (url: string | Request) => {
+  const res = await fetch(url);
+  return res.json();
+};
 interface ITag {
   num: number;
   name: string;
@@ -13,11 +17,35 @@ export default function SearchBar({
   HandleChange: any;
   inpText: string;
 }) {
-  let [tags, setTags] = useState<ITag[]>([
-    { num: 0, name: "javascript" },
-    { num: 4, name: "react" },
-  ]);
-
+  let [tags, setTags] = useState<ITag[]>([]);
+  useEffect(() => {
+    // edge functions
+    // articles:{post:{"a","b"},post:{"a","c"}} => tags:{"a"2,"b","c"}
+    let getTagsFromPosts = async () => {
+      if (tags.length !== 0) return;
+      // i have an array of articles
+      let posts = await fetcher("/api/articles/");
+      if (posts?.data) {
+        let data: ITag[] = [];
+        // loop in the posts and tags
+        posts.data.forEach((post: any) => {
+          post.tags.forEach((tag: any) => {
+            // and chek if the tags is alerdy in the new array
+            let statement = data.filter((el) => el.name == tag);
+            // if false create a new one
+            if (statement.length === 0) {
+              data.push({ name: tag, num: 1 });
+            } else {
+              // if true add to the number property
+              statement[0].num++;
+            }
+          });
+        });
+        setTags(data);
+      }
+    };
+    getTagsFromPosts();
+  }, []);
   let r = useRouter();
   return (
     <>
@@ -26,6 +54,7 @@ export default function SearchBar({
           type="text"
           placeholder="ابحث داخل المدونة..."
           value={inpText}
+          autoFocus
           onChange={HandleChange}
           className="w-full bg-white dark:bg-gray-600 shadow-md rounded-lg outline-none focus:shadow p-3"
         />

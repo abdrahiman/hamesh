@@ -5,7 +5,7 @@ function ContentTable() {
   let [hs, setH] = useState<[string] | []>([]);
   useEffect(() => {
     const elements = document.querySelectorAll("h2");
-    let data: [string] | [] = [];
+    let data: any = [];
     elements.forEach((el: any) => {
       let st: string = el.textContent || "";
       el.id = st.replaceAll(" ", "-");

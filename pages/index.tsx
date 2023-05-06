@@ -6,6 +6,8 @@ import Container from "../components/Container";
 import HomeHeader from "../components/headers/homeHeader";
 import Post from "../components/post/post";
 import useSWR from "swr";
+import PostLoader from "../components/loaders";
+import BLOG from "../BLOG.config";
 const fetcher = async (url: string | Request) => {
   const res = await fetch(url);
   return res.json();
@@ -26,7 +28,15 @@ interface IArticle {
 }
 
 export default function Page() {
-  let { data: articles, error, isLoading } = useSWR("/api/articles/", fetcher);
+  let [limit, setLimit] = useState(BLOG.postsPerPage);
+  let {
+    data: articles,
+    error,
+    isLoading,
+  } = useSWR(
+    `/api/articles${limit != BLOG.postsPerPage ? "?limit=" + limit : ""}`,
+    fetcher
+  );
 
   return (
     <>
@@ -37,7 +47,24 @@ export default function Page() {
             articles.data.map((art: IArticle) => (
               <Post key={art._id} art={art} />
             ))}
+
+          {isLoading && !articles?.data && (
+            <>
+              <PostLoader />
+              <PostLoader />
+              <PostLoader />
+              <PostLoader />
+            </>
+          )}
         </main>
+        {articles?.data && articles.data.length == limit && (
+          <button
+            className="px-4 covr py-1 font-medium rounded-lg transition relative"
+            onClick={() => setLimit(limit + BLOG.postsPerPage)}
+          >
+            Show More
+          </button>
+        )}
       </Container>
     </>
   );
