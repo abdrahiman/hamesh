@@ -12,8 +12,7 @@ import { useRouter } from "next/router";
 import "moment/locale/ar";
 import Script from "next/script";
 import BLOG from "../BLOG.config";
-import dynamic from "next/dynamic";
-const Gtag = dynamic(() => import("../components/Gtag"), { ssr: false });
+import * as gtag from "../lib/gtag";
 
 const variants = {
   in: {
@@ -48,10 +47,22 @@ export default function App({
     document.body.className = "bg-day dark:bg-night";
     document.querySelector(":root")?.setAttribute("lang", "ar");
   });
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      /* invoke analytics function only for production */
+      if (BLOG.isProd) gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+  // eslint-disable-next-
   return (
     <>
-      <>
-        {BLOG.isProd && (
+      {/* {BLOG.isProd && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${BLOG.analytics.gaConfig.measurementId}`}
@@ -67,7 +78,7 @@ export default function App({
           </>
         )}
       </>
-      {BLOG.isProd && BLOG?.analytics?.provider === "ga" && <Gtag />}
+      {BLOG.isProd && BLOG?.analytics?.provider === "ga" && <Gtag />} */}
       <SessionProvider session={session}>
         <EditorProvider>
           <Layout>
