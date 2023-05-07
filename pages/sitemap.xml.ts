@@ -43,8 +43,12 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   const posts = await Article.find({ isDraft: false });
   // We generate the XML sitemap with the posts data
   const sitemap = generateSiteMap(posts);
-
+  res.statusCode = 200;
   res.setHeader("Content-Type", "text/xml");
+
+  // Instructing the Vercel edge to cache the file
+  res.setHeader("Cache-control", "stale-while-revalidate, s-maxage=3600");
+
   // we send the XML to the browser
   res.write(sitemap);
   res.end();
