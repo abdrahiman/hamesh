@@ -46,29 +46,6 @@ function HomeHeader() {
             </span>
           </button>
         </Link>
-        <button className="bg-gray-100 gap-3 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 inline-flex py-3 px-5 rounded-lg items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-            className="inline-block text-gray-600 dark:text-gray-100 h-7 w-7"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              strokeWidth="2"
-              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
-            ></path>
-          </svg>
-          <span className="ml-4 flex items-start flex-col leading-none">
-            <span className="text-xs text-gray-600 dark:text-gray-100 mb-1">
-              RSS Reader
-            </span>
-            <span className="font-medium">اشترك</span>
-          </span>
-        </button>
       </div>
     </header>
   );

@@ -36,11 +36,11 @@ function PostHeader({ art }: { art: IArticle }) {
         {art.title}
       </h1>
       <div className="flex mt-5 mb-10 items-start text-gray-500 dark:text-gray-400 flex-wrap">
-        <div className="flex flex-wrap max-w-full overflow-x-auto article-tags">
+        <div className="flex gap-2 flex-wrap max-w-full overflow-x-auto article-tags">
           {art.tags &&
             art.tags.map((t: string, i) => (
               <Link href={"/tag/" + t} key={i}>
-                <p className="ml-2 rounded-full px-2 py-1 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 leading-none text-sm">
+                <p className="rounded-full px-2 py-1 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 leading-none text-sm">
                   {t}
                 </p>
               </Link>

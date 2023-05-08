@@ -241,7 +241,7 @@ export default function MyNav() {
                 ></path>
               </svg>
             </button>
-            <Link href="/">
+            {/* <Link href="/">
               <button
                 aria-label="LangSwitcher"
                 className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer rounded-lg dark:text-gray-100"
@@ -262,7 +262,7 @@ export default function MyNav() {
                   ></path>
                 </svg>
               </button>
-            </Link>
+            </Link> */}
           </div>
           <MbNav mbNav={mbNav} setMbNav={setMbNav} />
         </div>

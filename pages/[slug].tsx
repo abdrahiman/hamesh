@@ -13,6 +13,8 @@ const fetcher = async (url: string | Request) => {
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
 import { FullPostLoader } from "../components/loaders";
+import Link from "next/link";
+import BLOG from "../BLOG.config";
 hljs.registerLanguage("javascript", javascript);
 
 export async function getServerSideProps(ctx: any) {
@@ -45,6 +47,11 @@ export default function FullPost({ slug }: { slug: string }) {
         setTimeout(() => Btn.classList.remove("copied"), 3000);
       };
       hljs.highlightElement(c);
+    });
+    document.querySelectorAll("article.content a").forEach((a: any) => {
+      if (a.href.includes(BLOG.link)) return;
+      a.setAttribute("target", "_blank");
+      a.setAttribute("rel", "noreferrer");
     });
   }, [article]);
 

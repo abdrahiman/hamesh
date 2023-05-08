@@ -12,11 +12,25 @@ nav {
   backdrop-filter: blur(5px);
   transition: all 0.5s cubic-bezier(0.4, 0, 0, 1);
   border-bottom-color: transparent;
-
+  .logo svg {
+    @media ($mb) {
+      width: 98px;
+      height: 70px;
+    }
+  }
+  & > div.flex.items-center.flex-row.justify-start > p {
+    @media ($mb) {
+      display: none;
+    }
+  }
   &.scrolling {
     max-width: 100%;
     padding-left: 3rem;
     padding-right: 3rem;
+    @media ($mb) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }
 .full-post {
@@ -45,19 +59,7 @@ nav {
 
   // color: var(--bg-rev);
 }
-// .my-container {
-//   animation: FeedIn 0.5s cubic-bezier(0.4, 0, 0, 1);
-// }
-@keyframes FeedIn {
-  from {
-    opacity: 0;
-    transform: translateY(6rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
+
 .notion > * {
   padding: 3px 0;
 }
@@ -81,14 +83,14 @@ nav {
   margin-bottom: 0.75rem;
 }
 main > div a {
-  img {
-    position: absolute;
+  // img {
+  //   position: absolute;
 
-    opacity: 0;
-    width: 100%;
-    left: 0;
-    top: 0;
-  }
+  //   opacity: 0;
+  //   width: 100%;
+  //   left: 0;
+  //   top: 0;
+  // }
   &:hover {
     img {
       opacity: 0.6;
@@ -202,6 +204,7 @@ article.content {
     border-radius: 0.5rem;
     p {
       margin: 0;
+      font-size: 1rem;
       margin-right: 1.2rem;
     }
     &::before {
@@ -259,6 +262,9 @@ article.content {
     margin-top: 0;
     margin-bottom: 0;
     width: 100%;
+    li {
+      margin-top: 0.6rem;
+    }
   }
   img {
     border-radius: 0.5rem;

@@ -4,7 +4,7 @@ import BLOG from "../BLOG.config";
 
 function SocailMedai() {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 justify-center items-center">
       <a
         target="_blank"
         aria-label="Telegram"
@@ -12,7 +12,7 @@ function SocailMedai() {
         href={BLOG.socialLink.instagram}
         rel="noreferrer"
       >
-        <IoLogoInstagram height={"1.2rem"} width="1.2rem" />
+        <IoLogoInstagram style={{ height: "1.2rem", width: "1.2rem" }} />
       </a>
       <a
         target="_blank"

@@ -13,7 +13,7 @@ const PostLoader = (props: any) => {
       {...props}
     >
       {/* Cover image */}
-      <rect x="0" y="0" rx="4" ry="4" width="450" height="60" />
+      <rect x="0" y="0" rx="10" ry="10" width="450" height="60" />
       {/* <rect x="235" y="40" rx="3" ry="3" width="155" height="10" />
       <rect x="235" y="53" rx="3" ry="3" width="130" height="9" /> */}
       {/* <rect x="235" y="65" rx="3" ry="3" width={"50"} height="5" /> */}

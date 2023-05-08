@@ -37,10 +37,11 @@ function Header() {
     } else {
       setTag(true);
     }
+    setValue("");
   };
 
   return (
-    <header className="w-full p-4 flex flex-col">
+    <header className="w-full p-4 flex flex-col max-sm:p-0">
       <div className="w-full mb-5">
         {editorData.coverUrl ? (
           <div className="flex flex-row-reverse justify-around items-center">
@@ -91,9 +92,23 @@ function Header() {
           setEditorData((prv: any) => ({ ...prv, title: e.target.value }))
         }
         placeholder="ادخل عنوانا مناسبا..."
-        className="w-full max-sm:text-3xl max-md:text-4xl bg-transparent outline-none h-14 mb-5 text-5xl font-semibold"
+        className="w-full max-sm:text-3xl max-md:text-4xl bg-transparent outline-none h-14 mb-3 text-5xl font-semibold"
       />
-      <div className="tags flex gap-2 justify-start items-center">
+      <div className="desc">
+        <textarea
+          value={editorData.description}
+          onChange={(e) =>
+            setEditorData((prv: any) => ({
+              ...prv,
+              description: e.target.value,
+            }))
+          }
+          maxLength={250}
+          placeholder="ادخل وصفا لمقالك..."
+          className="w-full bg-transparent outline-none h-14 mb-2 font-semibold"
+        />
+      </div>
+      <div className="tags mb-4 flex gap-2 justify-start items-center">
         {tagInp && (
           <>
             <button
@@ -105,13 +120,19 @@ function Header() {
             <input
               type="text"
               value={inpValue}
+              onKeyDown={(e): any => {
+                if (e.key === "Enter") handleAddTag;
+              }}
               onChange={(e: any) => setValue(e.target.value)}
               className="w-24 rounded-md ps-1 bg-transparent border-solid border-2 border-white h-full"
             />
           </>
         )}
-        <button className="add rounded-lg p-1 bg-gray-600 text-white">
-          <IoIosAdd className="w-5 h-5" onClick={handleAddTag} />
+        <button
+          onClick={handleAddTag}
+          className="add rounded-lg p-1 bg-gray-600 text-white"
+        >
+          <IoIosAdd className="w-5 h-5" />
         </button>
         <ul className="tags-list">
           {editorData.tags.map((el, i) => (

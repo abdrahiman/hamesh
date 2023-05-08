@@ -35,11 +35,11 @@ export default function Post({ art }: { art: IArticle }) {
       <article className="group flex flex-col overflow-hidden relative mb-5 md:mb-8 cursor-pointer rounded-xl p-5 py-5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-500 ">
         {/* max-md:py-5 */}
         <img
-          alt=""
-          className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200 opacity-0 max-md:opacity-90"
+          alt="Cover image"
+          className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200 opacity-0 max-md:opacity-90 hover:opacity-90"
           src={
             art.coverUrl ||
-            "https://cdn.pixabay.com/photo/2022/01/25/16/55/iceberg-6966784__340.jpg"
+            "https://sp-ao.shortpixel.ai/client/q_glossy,ret_img,w_370/https://ssd-conf.org/wp-content/uploads/2016/06/blog-thumb-placeholder.jpg"
           }
         />
         <div className="hidden md:block md-cover absolute inset-0 right-0"></div>
@@ -55,7 +55,7 @@ export default function Post({ art }: { art: IArticle }) {
             </span>
           </header>
           <p className="font-light hidden md:block leading-8 text-gray-700 dark:text-gray-300">
-            {art.description} nill
+            {art.description}
           </p>
         </div>
       </article>

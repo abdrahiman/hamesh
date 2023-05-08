@@ -10,15 +10,15 @@ function ENAV() {
     <>
       <nav
         id="topContainer"
-        className="sc-cEvuZC bjeUhM top-0 w-full z-50 h-[46px] backdrop-blur-[10px] transition ml-0 fixed bg-none"
+        className=" top-0 w-full z-50 h-[46px] backdrop-blur-[10px] transition ml-0 fixed bg-none"
       >
         <div
           id="headerBackground"
-          className="sc-iQtOjA dREOVI"
+          className=""
           style={{ backgroundColor: "rgb(34, 34, 34)" }}
         ></div>
         <div className="flex items-center justify-between h-[46px]">
-          <div className="mr-4 sm:ml-4 h-full flex items-center justify-start shrink-0">
+          <div className="mr-4 sm:ml-4 h-full flex items-center justify-start shrink-0 text-[17px]">
             {r.route == "/dashboard" && "قيادة "}
           </div>
           {r.route == "/editor" && (
@@ -39,10 +39,10 @@ function ENAV() {
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g fill-rule="evenodd">
+                  <g fillRule="evenodd">
                     <path
                       d="M8.05,12.01 C8.05,11.59 7.90,11.23 7.60,10.94 C7.30,10.64 6.94,10.5 6.51,10.5 C6.09,10.5 5.74,10.64 5.44,10.94 C5.14,11.23 5,11.59 5,12.01 C5,12.29 5.06,12.55 5.20,12.77 C5.34,13.00 5.52,13.18 5.75,13.31 C5.98,13.45 6.23,13.52 6.51,13.52 C6.80,13.52 7.06,13.45 7.29,13.31 C7.52,13.18 7.71,13.00 7.85,12.77 C7.98,12.55 8.05,12.29 8.05,12.01 Z M13.51,12.01 C13.51,11.59 13.36,11.23 13.06,10.94 C12.77,10.64 12.41,10.5 11.99,10.5 C11.57,10.5 11.22,10.64 10.93,10.94 C10.63,11.23 10.48,11.59 10.48,12.01 C10.48,12.29 10.55,12.55 10.69,12.77 C10.82,13.00 11.00,13.18 11.23,13.31 C11.46,13.45 11.72,13.52 11.99,13.52 C12.27,13.52 12.53,13.45 12.76,13.31 C12.99,13.18 13.17,13.00 13.30,12.77 C13.44,12.55 13.51,12.29 13.51,12.01 Z M19,12.01 C19,11.59 18.85,11.23 18.55,10.94 C18.25,10.64 17.90,10.5 17.48,10.5 C17.05,10.5 16.69,10.64 16.39,10.94 C16.09,11.23 15.94,11.59 15.94,12.01 C15.94,12.29 16.01,12.55 16.14,12.77 C16.28,13.00 16.47,13.18 16.70,13.31 C16.93,13.45 17.19,13.52 17.48,13.52 C17.76,13.52 18.01,13.45 18.24,13.31 C18.47,13.18 18.65,13.00 18.79,12.77 C18.93,12.55 19,12.29 19,12.01 Z"
-                      fill-rule="nonzero"
+                      fillRule="nonzero"
                     ></path>
                   </g>
                 </svg>
@@ -70,7 +70,7 @@ function ENAV() {
                   stroke="none"
                   stroke-width="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <path
                     className="transition craftLogo-1 fill-darkTextColor/[.4] group-hover:fill-[#718FCD] group-hover:opacity-100 "

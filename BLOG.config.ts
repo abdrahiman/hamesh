@@ -5,7 +5,7 @@ const BLOG = {
   email: "abderrahimaneddam1@gmail.com",
   link: "https://hamesh.vercel.app",
   newsletter: "Notionic Weekly",
-  description: "هامش هي مدونة شخصية تهدف الى تقديم اغناء المحتوى العربي ",
+  description: "هامش هي مدونة شخصية تهدف الى اغناء المحتوى العربي ",
   lang: "ar-EG", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   timezone: "Asia/Shanghai", // See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for all options.
   appearance: "auto", // ['light', 'dark', 'auto'],
@@ -17,12 +17,12 @@ const BLOG = {
   postsPerPage: 15,
   sortByDate: true,
   pagesShow: {
-    newsletter: true,
-    notes: true,
-    projects: true,
+    newsletter: false,
+    notes: false,
+    projects: false,
     contact: true,
-    books: true,
-    friends: true,
+    books: false,
+    friends: false,
   },
   showWeChatPay: true,
   previewImagesEnabled: true,

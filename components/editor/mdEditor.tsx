@@ -20,7 +20,6 @@ const MdEditor = () => {
   // }
   const onChange = useCallback((value: string) => {
     // setValue(value);
-    hanldle();
     setEditorData((prv: any) => ({ ...prv, markdown: value }));
   }, []);
   const hanldle = () => {
@@ -63,6 +62,7 @@ const MdEditor = () => {
     console.log("lkk");
   };
   useEffect(() => {
+    hanldle();
     if (!document.querySelector("code")) return;
     document.querySelectorAll("pre button.copy").forEach((el) => el.remove());
     document.querySelectorAll("code").forEach((c: any) => {
