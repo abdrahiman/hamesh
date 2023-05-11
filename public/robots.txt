@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /dashboard/*
+Sitemap: https://hamesh.vercel.app/sitemap.xml
