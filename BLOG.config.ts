@@ -7,7 +7,7 @@ const BLOG = {
   newsletter: "Notionic Weekly",
   description: "هامش هي مدونة شخصية تهدف الى اغناء المحتوى العربي ",
   lang: "ar-EG", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
-  timezone: "Asia/Shanghai", // See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for all options.
+  timezone: "egypt/kahera", // See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for all options.
   appearance: "auto", // ['light', 'dark', 'auto'],
   font: "sans-serif", // ['sans-serif', 'serif']
   lightBackground: "#F6F8FA", // use hex value, don't forget '#' e.g #fffefc
@@ -33,7 +33,7 @@ const BLOG = {
   unsplashApiKey: process.env.UNSPLASH_API, // The link to generate OG image, don't end with a slash
   defaultCover: "/cover.jpg",
   socialLink: {
-    twitter: "https://twitter.com/iabderrahim",
+    twitter: "https://twitter.com/imabderrahim",
     github: "https://github.com/iabderrahim",
     instagram: "https://instagram.com/iabderrahim",
   },

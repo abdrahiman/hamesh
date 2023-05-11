@@ -1,5 +1,6 @@
 // import SEO from "@/components/Common/SEO";
 import React from "react";
+import BLOG from "../BLOG.config";
 import SEO from "./seo";
 
 function Container({
@@ -14,7 +15,7 @@ function Container({
   className?: string;
 }) {
   const meta = {
-    title: "Hamish",
+    title: BLOG.title,
     type: "website",
     ...customMeta,
   };
