@@ -30,13 +30,13 @@ const BLOG = {
   pagesIcon: "/logo.svg",
   urlCover: "regular", // the quality of the auto generated image ( raw > full > regular > "")
   ogImageGenerateHost: "og-zl.vercel.app", // The link to generate OG image, don't end with a slash
-  unsplashApiKey: process.env.UNSPLASH_API, // The link to generate OG image, don't end with a slash
   defaultCover: "/cover.jpg",
   socialLink: {
     twitter: "https://twitter.com/imabderrahim",
     github: "https://github.com/iabderrahim",
     instagram: "https://instagram.com/iabderrahim",
   },
+  RandomImagesEndPoint: `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_API}&query=nature&count=1`, //your api endpoint (unsplash,pexls...)
   seo: {
     keywords: [
       "hamesh",

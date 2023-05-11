@@ -6,9 +6,9 @@ function HomeHeader() {
   return (
     <header className="flex sticky px-4 flex-col mb:w-3/5 w-full md:items-start mb-6 md:mb-0 text-right">
       <main className="notion light-mode notion-page md:ml-0">
-        <div className="notion-text text-lg">
-          أنا عبدالرحيم أنضام، مبرمج متخصص في عالم الـ Backend 👨‍💻⚙️ :
-        </div>
+        <h1 className="notion-text text-lg">
+          أنا عبدالرحيم أنضام، مبرمج متخصص في عالم الـ WEB 👨‍💻⚙️ :
+        </h1>
         <ul className="notion-list notion-list-disc ">
           <li>أسعى جاهدًا لتعلم كل ما يدور حول البرمجة</li>
         </ul>

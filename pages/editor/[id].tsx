@@ -87,13 +87,13 @@ export default function Editor({ id }: { id: string }) {
     }
   };
 
-  useEffect(() => {
-    if (article) {
-      if (article.isDraft) {
-        setInterval(() => {}, 10000);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (article) {
+  //     if (article.isDraft) {
+  //       setInterval(() => {}, 10000);
+  //     }
+  //   }
+  // }, []);
   let handleUpdateDraft = async () => {
     const processedContent = await remark()
       .use(html)
