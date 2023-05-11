@@ -105,7 +105,7 @@ function Header() {
           }
           maxLength={250}
           placeholder="ادخل وصفا لمقالك..."
-          className="w-full bg-transparent outline-none h-14 mb-2 font-semibold"
+          className="w-full bg-transparent outline-none h-14 mb-2 font-medium"
         />
       </div>
       <div className="tags mb-4 flex gap-2 justify-start items-center">
