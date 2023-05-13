@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!-- We manually set the two URLs we know already -->
+<url>
+<loc>>https://hamesh.vercel.app</loc>
+</url>
+<loc>>https://hamesh.vercel.app/search</loc>
+</url>
+<url>
+<loc>>https://hamesh.vercel.app/contact</loc>
+</url>
+<url>
+<loc>https://hamesh.vercel.app/hello-word</loc>
+</url>
+<url>
+<loc>https://hamesh.vercel.app/hello-world</loc>
+</url>
+<url>
+<loc>https://hamesh.vercel.app/مسار-تعلمي-لحل-المشكلات</loc>
+</url>
+<url>
+<loc>https://hamesh.vercel.app/ما-هو-Recursive-في-البرمجة؟</loc>
+</url>
+<url>
+<loc>https://hamesh.vercel.app/فهم-pointers-في-لغة-c-:-دليل-شامل</loc>
+</url>
+</urlset>
