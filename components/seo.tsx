@@ -53,8 +53,15 @@ const SEO = ({ meta }: { meta: any }) => {
           <meta property="article:author" content={BLOG.author} />
         </>
       )}
+      <script
+        async
+        src={
+          "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" +
+          BLOG.ads.clientID
+        }
+        crossOrigin="anonymous"
+      ></script>
     </Head>
   );
 };
-
 export default SEO;

@@ -66,6 +66,9 @@ const BLOG = {
       websiteId: "", // The website id of your Umami instance
     },
   },
+  ads: {
+    clientID: "ca-pub-5674373923983019",
+  },
   comment: {
     // support provider: utterances, supacomments
     provider: "", // leave it empty if you don't need any comment plugin
