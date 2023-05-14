@@ -2,8 +2,8 @@ const BLOG = {
   title: "hamesh",
   ArTitle: "هامش",
   author: "Abderrahim",
-  email: "abderrahimaneddam1@gmail.com",
   link: "https://hamesh.vercel.app",
+  email: "abderrahimaneddam1@gmail.com",
   newsletter: "Notionic Weekly",
   description: "هامش هي مدونة شخصية تهدف الى اغناء المحتوى العربي ",
   lang: "ar-EG", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
@@ -16,6 +16,12 @@ const BLOG = {
   since: 2023, // If leave this empty, current year will be used.
   postsPerPage: 15,
   sortByDate: true,
+  showLoadingSpinner: false,
+  primaryColor: "#6455c7",
+  sendFromEmail: {
+    mail: "abderrhimaneddam@gmail.com",
+    password: "zzpzldwqwblnvcko",
+  },
   pagesShow: {
     newsletter: false,
     notes: false,

@@ -82,7 +82,7 @@ export default function MyNav() {
                 <g
                   transform="translate(0.000000,211.000000) scale(0.100000,-0.100000)"
                   // fill="#000000"
-                  className="opacity-100 dark:fill-day fill-night hover:fill-blue-500 dark:hover:fill-blue-500"
+                  className="opacity-100 dark:fill-day fill-night hover:fill-violet-500 dark:hover:fill-violet-500"
                   stroke="none"
                 >
                   <path d="M1202 1492 c-9 -6 -12 -27 -10 -63 l3 -54 64 -2 63 -3 -4 55 c-3 30 -7 57 -9 59 -10 9 -95 15 -107 8z" />
@@ -223,7 +223,7 @@ export default function MyNav() {
             <button
               aria-label="ThemeSwitcher"
               onClick={handleTheme}
-              className="p-2 ml-1 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer rounded-lg dark:text-gray-100"
+              className="p-2 mr-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer rounded-lg dark:text-gray-100"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

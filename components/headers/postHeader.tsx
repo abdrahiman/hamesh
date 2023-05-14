@@ -46,7 +46,7 @@ function PostHeader({ art }: { art: IArticle }) {
               </Link>
             ))}
         </div>
-        <div className="ml-2 mb-4 md:ml-0">
+        <div className="mr-2 mb-4 md:mr-1">
           <span>{getDate(art.createdAt)}</span>
         </div>
       </div>

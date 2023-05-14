@@ -19,6 +19,7 @@ nav {
     }
   }
   & > div.flex.items-center.flex-row.justify-start > p {
+    overflow: hidden;
     @media ($mb) {
       display: none;
     }
@@ -353,14 +354,20 @@ article.content {
     }
   }
 }
-.emoji-404{
-
+.emoji-404 {
+  color: #6455c7;
   position: relative;
   animation: mymove 2.5s infinite;
 }
 
 @keyframes mymove {
-  33%   {top: 0px;}
-  66%  {top: 20px;}
-  100%  {top: 0px}
+  33% {
+    top: 0px;
+  }
+  66% {
+    top: 20px;
+  }
+  100% {
+    top: 0px;
+  }
 }

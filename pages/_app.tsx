@@ -13,6 +13,7 @@ import "moment/locale/ar";
 import Script from "next/script";
 import BLOG from "../BLOG.config";
 import * as gtag from "../lib/gtag";
+import NextProgress from "next-progress";
 
 const variants = {
   in: {
@@ -62,23 +63,6 @@ export default function App({
   // eslint-disable-next-
   return (
     <>
-      {/* {BLOG.isProd && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${BLOG.analytics.gaConfig.measurementId}`}
-            />
-            <Script strategy="lazyOnload" id="ga">
-              {`window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${BLOG.analytics.gaConfig.measurementId}', {
-              page_path: window.location.pathname,
-            });`}
-            </Script>
-          </>
-        )}
-      </>
-      {BLOG.isProd && BLOG?.analytics?.provider === "ga" && <Gtag />} */}
       <SessionProvider session={session}>
         <EditorProvider>
           <Layout>
@@ -87,6 +71,10 @@ export default function App({
               mode="wait"
               onExitComplete={() => window.scrollTo(0, 0)}
             >
+              <NextProgress
+                color={BLOG.primaryColor}
+                options={{ showSpinner: BLOG.showLoadingSpinner }}
+              />
               <motion.div
                 key={asPath}
                 variants={variants}
