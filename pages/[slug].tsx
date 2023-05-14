@@ -79,7 +79,9 @@ export default function FullPost({ slug }: { slug: string }) {
   if (!article?.content && !isLoading) {
     return (
       <Container>
-        <h1>an error went happend</h1>
+        <h3 className="max-w-screen-md font-bold md:text-lg text-center mx-auto">
+          حذث خطأ ما
+        </h3>
       </Container>
     );
   }
