@@ -33,7 +33,7 @@ const MdEditor = () => {
   useEffect(() => {
     console.log("run");
     handler();
-  }, [document.querySelector(".editor-toolbar")]);
+  }, []);
   const onChange = useCallback((value: string) => {
     setEditorData((prv: any) => ({ ...prv, markdown: value }));
   }, []);
