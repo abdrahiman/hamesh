@@ -68,7 +68,7 @@ function ENAV() {
                 <g
                   id="Artboard-Copy-3"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
                   fillRule="evenodd"
                 >

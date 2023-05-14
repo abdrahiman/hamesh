@@ -60,6 +60,7 @@ export default async function HANDLER(
       if (!article) {
         return res.status(404).send({ error: "This article does not exist" });
       }
+      return res.status(200).json("the article is removed");
     }
     return res.status(404).end();
   } catch (err) {

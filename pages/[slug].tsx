@@ -15,6 +15,7 @@ import javascript from "highlight.js/lib/languages/javascript";
 import { FullPostLoader } from "../components/loaders";
 import Link from "next/link";
 import BLOG from "../BLOG.config";
+import Error from "../components/Error";
 hljs.registerLanguage("javascript", javascript);
 
 export async function getServerSideProps(ctx: any) {
@@ -64,7 +65,6 @@ export default function FullPost({ slug }: { slug: string }) {
           type: "article",
         }}
         className="full-post"
-        // date={new Date(frontMatter.publishedAt).toISOString()}
       >
         <PostHeader art={article} />
         <article
@@ -79,9 +79,7 @@ export default function FullPost({ slug }: { slug: string }) {
   if (!article?.content && !isLoading) {
     return (
       <Container>
-        <h3 className="max-w-screen-md font-bold md:text-lg text-center mx-auto">
-          حذث خطأ ما
-        </h3>
+        <Error />
       </Container>
     );
   }

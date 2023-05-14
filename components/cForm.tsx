@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { sendEmail } from "../utils/email";
+import Error from "./Error";
 
 export default function CForm() {
   let [isSended, setSend] = useState(false);
@@ -24,11 +25,7 @@ export default function CForm() {
     }
   };
   if (isSended == null) {
-    return (
-      <h3 className="max-w-screen-md font-bold md:text-lg text-center mx-auto">
-        حذث خطأ اثناء ارسال الرسالة
-      </h3>
-    );
+    return <Error message="حدث خطأ اثناء ارسال الرسالة" />;
   }
   return isSended ? (
     <h3 className="max-w-screen-md font-bold md:text-lg text-center mx-auto">

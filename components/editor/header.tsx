@@ -121,7 +121,7 @@ function Header() {
               type="text"
               value={inpValue}
               onKeyDown={(e): any => {
-                if (e.key === "Enter") handleAddTag;
+                if (e.key === "Enter") handleAddTag();
               }}
               onChange={(e: any) => setValue(e.target.value)}
               className="w-24 rounded-md ps-1 bg-transparent border-solid border-2 border-white h-full"
@@ -147,7 +147,7 @@ function Header() {
               }
             >
               #{el}
-              <span className="opacity-0 rounded-xl hover:opacity-100 bg-opacity-50 bg-black z-10 w-full h-full absolute top-0 left-0 flex justify-center items-center">
+              <span className="opacity-0 rounded-xl hover:opacity-100 bg-opacity-50 bg-black z-[5] w-full h-full absolute top-0 left-0 flex justify-center items-center">
                 <IoMdClose className="w-5 h-5" />
               </span>
             </li>

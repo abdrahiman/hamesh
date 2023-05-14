@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Container from "../../components/Container";
 import ENAV from "../../components/editor/nav";
 import MdEditor from "../../components/editor/mdEditor";
@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import Header from "../../components/editor/header";
 import useSWR from "swr";
 import Spinner from "../../components/spinner";
+import Error from "../../components/Error";
 const fetcher = async (url: string | Request) => {
   const res = await fetch(url);
   return res.json();
@@ -19,30 +20,41 @@ const fetcher = async (url: string | Request) => {
 export async function getServerSideProps(ctx: any) {
   return { props: { id: ctx.query.id } };
 }
+interface IPost {
+  title: "";
+  content: "";
+  markdown: "";
+  isDraft: boolean;
+  description: "";
+  coverUrl: "";
+  tags: [];
+}
 export default function Editor({ id }: { id: string }) {
   let r = useRouter();
   let { editorData, setEditorData } = useContext(EditorContext);
 
-  let {
-    data: article,
-    error,
-    isLoading,
-  } = useSWR("/api/articles/article?id=" + id, fetcher);
-
+  let [article, setArt] = useState<IPost | null | false>(null);
   useEffect(() => {
-    if (article) {
-      localStorage.removeItem("editorData");
-      console.log("i should not run");
-      setEditorData({
-        title: article.title || "",
-        content: article.content || "",
-        markdown: article.markdown || "",
-        isDraft: article.isDraft || true,
-        description: article.description || "",
-        coverUrl: article.coverUrl || "",
-        tags: article.tags || [],
-      });
-    }
+    let getArticle = async () => {
+      let res = await fetch("/api/articles/article?id=" + id);
+      let data: IPost = await res.json();
+      if (res.ok) {
+        localStorage.removeItem("editorData");
+        setEditorData({
+          title: data.title || "",
+          content: data.content || "",
+          markdown: data.markdown || "",
+          isDraft: data.isDraft || true,
+          description: data.description || "",
+          coverUrl: data.coverUrl || "",
+          tags: data.tags || [],
+        });
+        setArt(data);
+      } else {
+        setArt(false);
+      }
+    };
+    if (!article) getArticle();
   }, [article]);
 
   let handleUpdateArticle = async () => {
@@ -67,13 +79,11 @@ export default function Editor({ id }: { id: string }) {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
-    console.log(req);
     // let data = await req.json();
     if (!req.ok) {
       toast.error("حدث خطأ ما");
     } else {
       toast.success("تم التعديل بنجاح");
-
       localStorage.removeItem("editorData");
       setEditorData({
         title: "",
@@ -84,16 +94,27 @@ export default function Editor({ id }: { id: string }) {
         coverUrl: "",
         tags: [],
       });
+      r.push("/dashboard");
     }
   };
 
-  // useEffect(() => {
-  //   if (article) {
-  //     if (article.isDraft) {
-  //       setInterval(() => {}, 10000);
-  //     }
-  //   }
-  // }, []);
+  // let saveBtn = useRef(null);
+  useEffect(() => {
+    let int: any;
+    if (article) {
+      if (article.isDraft) {
+        int = setInterval(() => {
+          let btn: HTMLButtonElement | null =
+            document.querySelector("button.draft");
+          if (btn) {
+            btn.click();
+            console.log("saved");
+          }
+        }, 40000);
+      }
+    }
+    return () => clearInterval(int);
+  }, [article]);
   let handleUpdateDraft = async () => {
     const processedContent = await remark()
       .use(html)
@@ -116,21 +137,26 @@ export default function Editor({ id }: { id: string }) {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
-    console.log(req);
     // let data = await req.json();
     if (!req.ok) {
       toast.error("حدث خطأ ما");
     } else {
-      toast.success("تم التعديل بنجاح");
+      let btn = document.querySelector("button.draft");
+      if (!btn) return;
+      btn.textContent = " ✅ تم الحفظ";
+      setTimeout(() => {
+        if (!btn) return;
+        btn.textContent = "حفظ التعديل كمسودة";
+      }, 5000);
     }
   };
-  if (isLoading) {
+  if (article === null) {
     return <Spinner />;
   }
-  if (error) {
+  if (article === false) {
     return (
-      <Container>
-        <h1 className="mt-12">حذث خطأ ما</h1>
+      <Container className="pt-12">
+        <Error />
       </Container>
     );
   } else {
@@ -175,7 +201,8 @@ export default function Editor({ id }: { id: string }) {
             </Link>
             <div className="flex gap-4">
               <button
-                className="px-6 py-2 font-medium rounded-lg transition"
+                className="px-6 py-2 font-medium rounded-lg transition draft"
+                // ref={saveBtn}
                 onClick={handleUpdateDraft}
               >
                 احفظ تعديل كمسودة
