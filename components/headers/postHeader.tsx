@@ -32,7 +32,8 @@ let getDate = (date: any) => {
 function PostHeader({ art }: { art: IArticle }) {
   return (
     <header className="flex w-full justify-start items-start flex-col mb-6">
-      <h1 className="font-bold text-3xl text-black dark:text-white">
+      {/* <h1 className="font-bold text-3xl text-black dark:text-white"> */}
+      <h1 className="inline px-2 text-3xl font-bold break-words rounded-md box-decoration-clone">
         {art.title}
       </h1>
       <div className="flex mt-5 mb-10 items-start text-gray-500 dark:text-gray-400 flex-wrap">

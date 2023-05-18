@@ -155,7 +155,7 @@
           top: 6px;
           transition: all 0.5s cubic-bezier(0.4, 0, 0, 1);
           &.copied {
-            background-color: #6455c7;
+            background-color: var(--primary-color);
             color: white;
           }
           // padding: 0.1rem;
@@ -252,7 +252,7 @@
           height: 1rem;
         }
         &.active {
-          background-color: #7b6cd9;
+          background-color: var(--primary-color);
         }
         &:hover {
           background-color: rgba(61, 61, 61, 0.788);

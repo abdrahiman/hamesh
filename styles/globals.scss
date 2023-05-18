@@ -63,11 +63,6 @@
 body {
   direction: rtl;
   font-family: "Tajawal", sans-serif;
-  // // flex justify-center flex-col max-w-3xl items-center mx-auto
-  // display: flex;
-  // justify-content: center;
-  // flex-direction: column;
-  // max
 }
 :root.dark {
   color-scheme: dark;
@@ -98,15 +93,6 @@ a {
   box-sizing: border-box;
 }
 
-// @media (prefers-color-scheme: dark) {
-//   html {
-//     color-scheme: dark;
-//   }
-//   body {
-//     color: white;
-//     background: black;
-//   }
-// }
 html {
   --scrollbarBG: #ffffff00;
   --thumbBG: #b8b8b8;
@@ -129,13 +115,19 @@ html::-webkit-scrollbar-thumb {
 html::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG);
 }
-
+// colors
+:root {
+  --primary-color: #6455c7;
+}
+:root.dark {
+  --primary-color: #ca5386;
+}
 ::selection {
-  background: #6455c7;
+  background: var(--primary-color);
   color: white;
 }
 
 @import "./home";
 @import "./auth";
 @import "./new";
-@import "./Nprogress";
+@import "./post";
