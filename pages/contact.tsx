@@ -1,5 +1,5 @@
 import React from "react";
-import CForm from "../components/cForm";
+import CForm from "../components/ui/cForm";
 import Container from "../components/Container";
 import CHeader from "../components/headers/cHeader";
 

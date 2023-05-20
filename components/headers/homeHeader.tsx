@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import SocailMedai from "../socailMedai";
+import SocailMedai from "../ui/socailMedai";
 
 function HomeHeader() {
   return (

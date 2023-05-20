@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { IoLogoInstagram } from "react-icons/io";
 import BLOG from "../BLOG.config";
-import SocailMedai from "./socailMedai";
+import SocailMedai from "./ui/socailMedai";
 
 export default function Footer() {
   return (

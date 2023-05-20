@@ -60,7 +60,6 @@ export default function App({
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
-  // eslint-disable-next-
   return (
     <>
       <SessionProvider session={session}>
@@ -77,6 +76,7 @@ export default function App({
               />
               <motion.div
                 key={asPath}
+                className="minHeightContainer"
                 variants={variants}
                 animate="in"
                 initial="out"

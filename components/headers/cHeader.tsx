@@ -4,7 +4,7 @@ import BLOG from "../../BLOG.config";
 
 export default function CHeader() {
   return (
-    <div className="mb-8 md:mb-16 text-gray-600 dark:text-gray-200 w-full">
+    <div className="mb-8 md:mb-16 text-gray-700 dark:text-gray-200 w-full">
       <h2 className="text-xl lg:text-3xl font-light text-center mb-4">
         一تواصل معنا
       </h2>
@@ -12,7 +12,7 @@ export default function CHeader() {
         صوتك مسموع، راسلنا في حالة وجود ملاحظات، شكاوي او مقترحات .
       </p>
       <p className="max-w-screen-md font-light md:text-lg text-center mx-auto">
-        يمكنك أيضًا الاتصال بـي مباشرة على تويتر
+        يمكنك أيضًا التواصل معي مباشرة على تويتر
         <a
           href={BLOG.socialLink.twitter}
           target="_blank"

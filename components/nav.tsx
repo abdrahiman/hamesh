@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import SocailMedai from "./socailMedai";
+import SocailMedai from "./ui/socailMedai";
 import { useRouter } from "next/router";
 import MbNav from "./ui/mbNav";
 import BLOG from "../BLOG.config";

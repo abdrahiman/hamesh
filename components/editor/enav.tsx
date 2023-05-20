@@ -21,7 +21,7 @@ function ENAV() {
           <div className="mr-4 sm:ml-4 h-full flex items-center justify-start shrink-0 text-[17px]">
             {r.route == "/dashboard" && "قيادة "}
           </div>
-          {r.route == "/editor" && (
+          {r.route == "/dashboard/editor" && (
             <div className="flex items-center justify-start flex-grow mr-2 overflow-hidden shrink">
               <div className="documentTitle text-[17px] tracking-[-0.1px] leading-none px-1.5 py-1.5 rounded-md transition truncate select-none text-darkTextColor cursor-default ">
                 {editorData.title || "بلا عنوان"}

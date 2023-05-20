@@ -15,7 +15,7 @@ import javascript from "highlight.js/lib/languages/javascript";
 import { FullPostLoader } from "../components/loaders";
 import Link from "next/link";
 import BLOG from "../BLOG.config";
-import Error from "../components/Error";
+import Error from "../components/ui/Error";
 hljs.registerLanguage("javascript", javascript);
 
 export async function getServerSideProps(ctx: any) {
@@ -29,7 +29,6 @@ export default function FullPost({ slug }: { slug: string }) {
     error,
     isLoading,
   } = useSWR("/api/articles/article?slug=" + slug, fetcher);
-  // checke if the error is 404
 
   useEffect(() => {
     if (!document.querySelector("code")) return;

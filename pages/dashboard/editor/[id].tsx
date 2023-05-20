@@ -1,25 +1,42 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import Container from "../../components/Container";
-import ENAV from "../../components/editor/nav";
-import MdEditor from "../../components/editor/mdEditor";
+import Container from "../../../components/Container";
+import ENAV from "../../../components/editor/enav";
+import MdEditor from "../../../components/editor/mdEditor";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { EditorContext } from "../../context/edioreProvider";
+import { EditorContext } from "../../../context/edioreProvider";
 import { remark } from "remark";
 import html from "remark-html";
 import { toast } from "react-toastify";
-import Header from "../../components/editor/header";
+import Header from "../../../components/editor/header";
 import useSWR from "swr";
-import Spinner from "../../components/spinner";
-import Error from "../../components/Error";
+import Spinner from "../../../components/ui/spinner";
+import Error from "../../../components/ui/Error";
 const fetcher = async (url: string | Request) => {
   const res = await fetch(url);
   return res.json();
 };
 
-export async function getServerSideProps(ctx: any) {
-  return { props: { id: ctx.query.id } };
-}
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]";
+import BLOG from "../../../BLOG.config";
+
+export const getServerSideProps = async (ctx: any) => {
+  let session = await getServerSession(ctx.req, ctx.res, authOptions);
+  let user = session?.user?.email == BLOG.email;
+  if (user) {
+    return { props: { id: ctx.query.id } };
+  } else {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth",
+      },
+      props: {},
+    };
+  }
+};
+
 interface IPost {
   title: "";
   content: "";
@@ -62,7 +79,6 @@ export default function Editor({ id }: { id: string }) {
       .use(html)
       .process(editorData.markdown);
     const contentHtml = processedContent.toString();
-    setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
 
     let req = await fetch("/api/articles/article", {
       method: "PUT",
@@ -99,28 +115,33 @@ export default function Editor({ id }: { id: string }) {
   };
 
   // let saveBtn = useRef(null);
+  let [heChanged, setIsChanged] = useState(false);
+  useEffect(() => {
+    setIsChanged(true);
+  }, [editorData]);
   useEffect(() => {
     let int: any;
     if (article) {
-      if (article.isDraft) {
-        int = setInterval(() => {
-          let btn: HTMLButtonElement | null =
-            document.querySelector("button.draft");
-          if (btn) {
-            btn.click();
-            console.log("saved");
-          }
-        }, 40000);
-      }
+      int = setInterval(() => {
+        if (!heChanged) {
+          return clearInterval(int);
+        }
+        let btn: HTMLButtonElement | null =
+          document.querySelector("button.draft");
+        if (btn) {
+          btn.click();
+        }
+        setIsChanged(false);
+      }, 5000);
     }
     return () => clearInterval(int);
-  }, [article]);
+  }, [heChanged]);
   let handleUpdateDraft = async () => {
     const processedContent = await remark()
       .use(html)
       .process(editorData.markdown);
     const contentHtml = processedContent.toString();
-    setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
+    // setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
 
     let req = await fetch("/api/articles/article", {
       method: "PUT",
@@ -196,7 +217,7 @@ export default function Editor({ id }: { id: string }) {
                     </g>
                   </g>
                 </svg>
-                <div className="">حفظ و الرجوع</div>
+                <div className="">رجوع</div>
               </div>
             </Link>
             <div className="flex gap-4">

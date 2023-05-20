@@ -1,6 +1,6 @@
 import React from "react";
 import { IoLogoInstagram } from "react-icons/io";
-import BLOG from "../BLOG.config";
+import BLOG from "../../BLOG.config";
 
 function SocailMedai() {
   return (

@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
-import ENAV from "./editor/nav";
+import ENAV from "./editor/enav";
 import Footer from "./footer";
 import MyNav from "./nav";
 export default function Layout({ children }: { children: any }) {
   let r = useRouter();
   let c =
-    r.route == "/editor" ||
+    r.route == "/dashboard/editor" ||
     r.route == "/dashboard" ||
-    r.route == "/editor/[id]";
+    r.route == "/dashboard/editor/[id]";
 
   return (
     <>

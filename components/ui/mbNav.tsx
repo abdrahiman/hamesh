@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import SocailMedai from "../socailMedai";
+import SocailMedai from "./socailMedai";
 
 function MbNav({ mbNav, setMbNav }: { mbNav: boolean; setMbNav: any }) {
   return (

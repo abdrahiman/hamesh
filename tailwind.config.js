@@ -15,6 +15,9 @@ module.exports = {
         night: {
           DEFAULT: BLOG.darkBackground || "#212936",
         },
+        primaryColor: {
+          DEFAULT: BLOG.primaryColor || "#6455c7",
+        },
       },
     },
   },

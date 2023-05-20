@@ -8,7 +8,7 @@
     border-bottom: 1px solid rgba(61, 61, 61, 0.788);
     transition: all 0.15s cubic-bezier(0, 0, 0.2, 1) 0s;
     box-shadow: rgba(255, 255, 255, 0.06) 0px 1px 0px;
-
+    height: 51px;
     pointer-events: auto;
   }
   #mdEditor-wrapper {
@@ -20,6 +20,9 @@
       border-radius: 0.5rem;
       border: none;
       font-size: 1.1rem;
+      &.CodeMirror-fullscreen {
+        padding: 0;
+      }
     }
 
     .editor-preview-full {
@@ -30,7 +33,7 @@
       // background: #222222;
       background-color: #212936;
       padding: 1rem;
-      // max-width: ;
+
       max-width: 100%;
       p {
         line-height: 2rem;
@@ -81,35 +84,25 @@
         background-color: rgba(55, 53, 47, 0.09);
       }
       a {
-        border-bottom-color: rgb(75 85 99 / var(--tw-border-opacity));
-        color: rgb(147 197 253 / var(--tw-text-opacity));
-        position: relative;
-        border-bottom-width: 2px;
-        border-bottom-color: rgb(229 231 235 / var(--tw-border-opacity));
-        background-repeat: no-repeat;
-        background-origin: border-box;
         word-break: break-word;
-        text-decoration: inherit;
-        border-bottom: 0.05em solid;
-        background-position: 50% 100%;
-        background-size: 0 0.1rem;
-        opacity: 0.7;
-        transition: border-color 0.1s ease-in, opacity 0.1s ease-in;
-        color: var(--a-color);
+        color: var(--primary-color);
+        transition: all 0.1s ease-in-out;
         font-weight: 600;
         &:hover,
         &:focus {
-          border-color: transparent;
-          background-repeat: no-repeat;
-          background-image: linear-gradient(
-            90.68deg,
-            var(--a-color) 0.26%,
-            var(--a-color) 102.37%
-          );
-          background-position: 0 100%;
-          background-size: 100% 0.1rem;
-          transition-property: background-position, background-size;
-          transition-duration: 0.2s;
+          background-color: var(--primary-color);
+          color: white;
+        }
+      }
+      h1,
+      h2 {
+        a {
+          color: var(--primary-color);
+          &:hover,
+          &:focus {
+            color: var(--primary-color);
+            background-color: transparent;
+          }
         }
       }
       ul {
@@ -213,8 +206,8 @@
       .CodeMirror-scroll {
         background-color: #222222;
         overflow: auto;
-        padding: 0% 7%;
-        padding-top: 4rem;
+        padding: 0% 6%;
+        padding-top: 2rem;
       }
     }
     .editor-toolbar {
@@ -225,15 +218,20 @@
       gap: 0.2rem;
       min-height: fit-content;
       position: sticky;
-      top: 46px;
+      top: 0px;
       border-bottom: 1px solid rgba(61, 61, 61, 0.788);
       border-top: 1px solid rgba(61, 61, 61, 0.788);
       transition: all 0.15s cubic-bezier(0, 0, 0.2, 1) 0s;
-      background: #1a1a1a;
+      --tw-backdrop-blur: blur(10px);
+      backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
+        var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
+        var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
+        var(--tw-backdrop-opacity) var(--tw-backdrop-saturate)
+        var(--tw-backdrop-sepia);
       z-index: 107;
       &.fullscreen {
         position: fixed;
-        top: 46px;
+        top: 0px;
       }
       .separator {
         border-color: rgba(61, 61, 61, 0.788);

@@ -1,15 +1,33 @@
 import React, { useContext, useEffect } from "react";
-import Container from "../../components/Container";
-import ENAV from "../../components/editor/nav";
-import MdEditor from "../../components/editor/mdEditor";
+import Container from "../../../components/Container";
+import ENAV from "../../../components/editor/enav";
+import MdEditor from "../../../components/editor/mdEditor";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { EditorContext } from "../../context/edioreProvider";
+import { EditorContext } from "../../../context/edioreProvider";
 import { remark } from "remark";
 import html from "remark-html";
 import { toast } from "react-toastify";
-import Header from "../../components/editor/header";
+import Header from "../../../components/editor/header";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]";
+import BLOG from "../../../BLOG.config";
 
+export const getServerSideProps = async (ctx: any) => {
+  let session = await getServerSession(ctx.req, ctx.res, authOptions);
+  let user = session?.user?.email == BLOG.email;
+  if (user) {
+    return { props: {} };
+  } else {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth",
+      },
+      props: {},
+    };
+  }
+};
 export default function Editor() {
   let r = useRouter();
   let { editorData, setEditorData } = useContext(EditorContext);

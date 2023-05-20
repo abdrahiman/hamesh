@@ -9,10 +9,11 @@ import React, { useState } from "react";
 import { IoLogoGithub, IoLogoTwitter } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
-import Spinner from "../components/spinner";
+import Spinner from "../components/ui/spinner";
+import Image from "next/image";
+import Container from "../components/Container";
 
 export async function getServerSideProps(context: any) {
-  const { req } = context;
   const providers = await getProviders();
   return {
     props: {
@@ -34,19 +35,25 @@ const Auth = ({ providers }: IAuth) => {
     });
     setLod("");
   };
-  let { data: user, isLoading, error } = useSwr("/api/getUser", fetcher);
+  let { data: user, isLoading, error } = useSwr("/api/getSession", fetcher);
   if (isLoading && !user) {
     return <Spinner />;
   }
 
   return (
-    <div className="auth flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      {!user?.email ? (
+    <Container>
+      {!user?.data ? (
         <div className="w-full flex flex-col items-center max-w-md gap-6">
           <div className="flex flex-col items-center gap-8 ">
-            <img src="/favicon.ico" alt="" className="h-12" />
-            <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-gray-900 ">
-              Sign in to your account
+            <Image
+              src="/logo.svg"
+              alt=""
+              className="h-12"
+              height={48}
+              width={70}
+            />
+            <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight ">
+              تسجيل الدخول لحسابك
             </h2>
           </div>
           {providers &&
@@ -55,10 +62,10 @@ const Auth = ({ providers }: IAuth) => {
                 return (
                   <a
                     key={provider.id}
-                    className={`max-w-sm mx-auto w-full h-12 rounded-md flex justify-center gap-3 items-center hover:bg-black cursor-pointer hover:text-white hover:scale-95 transition-all ${
+                    className={`max-w-sm mx-auto w-full h-12 rounded-md flex justify-center gap-3 items-center hover:bg-night dark:hover:bg-day text-day dark:hover:text-night hover:scale-95 transition-all ${
                       loading
                         ? loading == provider.id
-                          ? "opacity-50 bg-black text-white scale-95"
+                          ? "opacity-50 bg-night dark:bg-day text-day dark:text-night scale-95"
                           : "pointer-events-none cursor-not-allowed opacity-90"
                         : ""
                     }`}
@@ -80,20 +87,26 @@ const Auth = ({ providers }: IAuth) => {
       ) : (
         <div className="w-full flex flex-col items-center max-w-md gap-6">
           <div className="flex flex-col items-center gap-8 ">
-            <img src="/favicon.ico" alt="" className="h-12" />
-            <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-gray-900 ">
-              you aleardy Logged in
+            <Image
+              src="/logo.svg"
+              alt=""
+              className="h-12"
+              height={48}
+              width={70}
+            />
+            <h2 className="mt-4 mb-6 text-center text-3xl font-bold tracking-tight  ">
+              مرحبا {user.data?.name}, انت مسجل بالفعل
             </h2>
           </div>
           <a
-            className={`max-w-sm mx-auto w-full h-12 rounded-md flex justify-center gap-3 items-center hover:bg-black cursor-pointer hover:text-white hover:scale-95 transition-all `}
+            className={`max-w-sm mx-auto w-full h-12 rounded-md flex justify-center gap-3 items-center font-medium hover:bg-night dark:hover:bg-day text-night  hover:text-white dark:hover:text-dark cursor-pointer hover:scale-95 transition-all `}
             onClick={() => signOut()}
           >
-            Sign Out
+            تسجيل الخروج
           </a>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

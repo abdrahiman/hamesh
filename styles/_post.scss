@@ -13,13 +13,9 @@
 body {
   scroll-behavior: smooth;
 }
-// .full-post h1 {
-//   background: var(--primary-color);
-//   padding: 0.2rem 0.4rem;
-//   color: white;
-// }
+
 article.content {
-  overflow: hidden;
+  overflow: auto;
   max-width: 100%;
   p {
     line-height: 2rem;

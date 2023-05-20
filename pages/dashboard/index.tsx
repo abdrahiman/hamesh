@@ -3,11 +3,29 @@ import { MdDelete } from "react-icons/md";
 import Container from "../../components/Container";
 import Link from "next/link";
 import useSWR from "swr";
+import BLOG from "../../BLOG.config";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 const fetcher = async (url: string | Request) => {
   const res = await fetch(url);
   return res.json();
 };
 
+export const getServerSideProps = async (ctx: any) => {
+  let session = await getServerSession(ctx.req, ctx.res, authOptions);
+  let user = session?.user?.email == BLOG.email;
+  if (user) {
+    return { props: {} };
+  } else {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth",
+      },
+      props: {},
+    };
+  }
+};
 function Index() {
   let {
     data: articles,
@@ -39,7 +57,7 @@ function Index() {
           <div className="flex justify-between w-full items-center">
             <h2 className="text-lg font-medium">المنشورات:</h2>
             <button className="px-4 py-1 font-medium rounded-lg transition">
-              <Link href={"/editor"}>كتابة منشور</Link>
+              <Link href={"/dashboard/editor"}>كتابة منشور</Link>
             </button>
           </div>
         </header>
@@ -117,7 +135,7 @@ function Index() {
             articles.data.map((ar: any) => (
               <div key={ar._id}>
                 <article className="group flex flex-col overflow-hidden relative mb-5 md:mb-8 cursor-pointer rounded-xl p-5 py-4 pb-10 dark:bg-gray-600">
-                  <Link href={"/editor/" + ar._id}>
+                  <Link href={"/dashboard/editor/" + ar._id}>
                     <img
                       alt=""
                       className="w-full h-full object-cover object-center absolute inset-0 opacity-100 group-hover:scale-110 transition duration-200"
@@ -138,7 +156,7 @@ function Index() {
                   <div className="sm-cover absolute inset-0 right-0"></div>
                   <div className="relative mt-auto">
                     <header className="flex flex-col justify-between md:flex-row md:items-baseline">
-                      <Link href={"/editor/" + ar._id}>
+                      <Link href={"/dashboard/editor/" + ar._id}>
                         <h2 className="text-lg md:text-xl font-medium mb-2 text-black dark:text-gray-100">
                           {ar.title}
                         </h2>
