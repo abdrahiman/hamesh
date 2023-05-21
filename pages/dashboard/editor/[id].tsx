@@ -119,6 +119,7 @@ export default function Editor({ id }: { id: string }) {
   useEffect(() => {
     console.log("changed");
     setIsChanged(true);
+    setArt(article);
   }, [editorData]);
   useEffect(() => {
     let int: any;
@@ -139,7 +140,7 @@ export default function Editor({ id }: { id: string }) {
       }, 5000);
     }
     return () => clearInterval(int);
-  }, [heChanged, setIsChanged]);
+  }, [heChanged, article]);
   let handleUpdateDraft = async () => {
     const processedContent = await remark()
       .use(html)
