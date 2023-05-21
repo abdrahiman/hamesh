@@ -146,7 +146,6 @@ export default function Editor({ id }: { id: string }) {
       .use(html)
       .process(editorData.markdown);
     const contentHtml = processedContent.toString();
-    // setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
 
     let req = await fetch("/api/articles/article", {
       method: "PUT",
