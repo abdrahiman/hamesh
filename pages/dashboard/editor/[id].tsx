@@ -117,6 +117,7 @@ export default function Editor({ id }: { id: string }) {
   // let saveBtn = useRef(null);
   let [heChanged, setIsChanged] = useState(false);
   useEffect(() => {
+    console.log("changed");
     setIsChanged(true);
   }, [editorData]);
   useEffect(() => {
@@ -124,6 +125,7 @@ export default function Editor({ id }: { id: string }) {
     if (article) {
       int = setInterval(() => {
         if (!heChanged) {
+          console.log("outed");
           return clearInterval(int);
         }
         let btn: HTMLButtonElement | null =
@@ -131,8 +133,9 @@ export default function Editor({ id }: { id: string }) {
         if (btn) {
           btn.click();
         }
+        console.log("saved");
         setIsChanged(false);
-      }, 5000);
+      }, 10000);
     }
     return () => clearInterval(int);
   }, [heChanged]);
