@@ -42,20 +42,20 @@ export default function Page() {
     <>
       <Container>
         <HomeHeader />
-        <main className="mb-2 w-full md:mb-12 py-8 px-4">
+        <main className="mb-2 w-full grid gap-4 grid-cols-2 max-md:grid-cols-1 md:mb-12 py-8 px-4 max-md:px-0">
           {articles?.data &&
             articles.data.map((art: IArticle) => (
               <Post key={art._id} art={art} />
             ))}
 
-          {isLoading && !articles?.data && (
+          {/* {isLoading && !articles?.data && (
             <>
               <PostLoader />
               <PostLoader />
               <PostLoader />
               <PostLoader />
             </>
-          )}
+          )}*/}
         </main>
         {articles?.data && articles.data.length == limit && (
           <button

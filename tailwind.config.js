@@ -18,6 +18,9 @@ module.exports = {
         primaryColor: {
           DEFAULT: BLOG.primaryColor || "#6455c7",
         },
+        primaryColorD: {
+          DEFAULT: BLOG.primaryColorD || "#6455c7",
+        },
       },
     },
   },

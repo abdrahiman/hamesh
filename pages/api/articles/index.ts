@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import BLOG from "../../../BLOG.config";
 import Article from "../../../models/article";
+import Draft from "../../../models/draft";
 import dbConnect from "../../../utils/db";
 import GenerateImage from "../../../utils/image-generate";
 export default async function HANDLER(
@@ -18,10 +19,10 @@ export default async function HANDLER(
       let lm = req.query.limit || BLOG.postsPerPage;
       let all = req.query.all;
       if (all) {
-        const articles = await Article.find({})
-          .sort({ createdAt: -1 })
-          .limit(+lm);
-        return res.status(201).json({ data: articles });
+        const articles = await Article.find({}).sort({ createdAt: -1 });
+        const drafts = await Draft.find({}).sort({ createdAt: -1 });
+        let all = [...drafts, ...articles];
+        return res.status(201).json({ data: all });
       }
       let tagSearch = req.query.tag;
       if (tagSearch) {

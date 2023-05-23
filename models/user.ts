@@ -15,7 +15,7 @@ let UserSchema = new Schema(
     timestamps: true, // Enable createdAt and updatedAt fields
   }
 );
-// delete models.user;
+// delete models.User;
 
 let User = models.User;
 if (!User) {

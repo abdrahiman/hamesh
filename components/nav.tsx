@@ -62,7 +62,7 @@ export default function MyNav() {
     <>
       <div className="observer-element h-4 md:h-12"></div>
       <nav
-        className={`sticky-nav max-w-3xl mx-auto m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 px-4 ${
+        className={`sticky-nav max-w-3xl mx-auto m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-8 py-8 bg-opacity-60 px-4 ${
           Scroll == 0 ? "" : "scrolling"
         }`}
         id="sticky-nav"
@@ -82,7 +82,7 @@ export default function MyNav() {
                 <g
                   transform="translate(0.000000,211.000000) scale(0.100000,-0.100000)"
                   // fill="#000000"
-                  className="opacity-100 dark:fill-day fill-night hover:fill-violet-500 dark:hover:fill-violet-500"
+                  className="opacity-100 dark:fill-day fill-night hover:fill-primaryColor dark:hover:fill-primaryColorD"
                   stroke="none"
                 >
                   <path d="M1202 1492 c-9 -6 -12 -27 -10 -63 l3 -54 64 -2 63 -3 -4 55 c-3 30 -7 57 -9 59 -10 9 -95 15 -107 8z" />

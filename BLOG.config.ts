@@ -17,7 +17,8 @@ const BLOG = {
   postsPerPage: 15,
   sortByDate: true,
   showLoadingSpinner: false,
-  primaryColor: "#6455c7",
+  primaryColor: "#0f766e",
+  primaryColorD: "#2dd4bf",
   sendFromEmail: {
     mail: "abderrhimaneddam@gmail.com",
     password: "zzpzldwqwblnvcko",

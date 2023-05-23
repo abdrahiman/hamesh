@@ -132,7 +132,7 @@ export default function Page() {
           </div>
         </center>
         <Link href="/">
-          <center className="mt-6 text-night dark:text-day font-mono text-xl bg-gray-200 p-3 rounded-md hover:shadow-md">
+          <center className="mt-6 text-night font-medium text-xl bg-gray-200 p-3 rounded-md hover:shadow-md">
             عودة لرئيسية
           </center>
         </Link>

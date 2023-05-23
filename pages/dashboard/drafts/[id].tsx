@@ -41,7 +41,6 @@ interface IPost {
   title: "";
   content: "";
   markdown: "";
-  isDraft: boolean;
   description: "";
   coverUrl: "";
   tags: [];
@@ -53,7 +52,7 @@ export default function Editor({ id }: { id: string }) {
   let [article, setArt] = useState<IPost | null | false>(null);
   useEffect(() => {
     let getArticle = async () => {
-      let res = await fetch("/api/articles/article?id=" + id);
+      let res = await fetch("/api/drafts?id=" + id);
       let data: IPost = await res.json();
       if (res.ok) {
         localStorage.removeItem("editorData");
@@ -61,7 +60,6 @@ export default function Editor({ id }: { id: string }) {
           title: data.title || "",
           content: data.content || "",
           markdown: data.markdown || "",
-
           description: data.description || "",
           coverUrl: data.coverUrl || "",
           tags: data.tags || [],
@@ -74,17 +72,45 @@ export default function Editor({ id }: { id: string }) {
     if (!article) getArticle();
   }, [article]);
 
-  let handleUpdateArticle = async () => {
+  // let saveBtn = useRef(null);
+  let [heChanged, setIsChanged] = useState(false);
+  useEffect(() => {
+    console.log("changed");
+    setIsChanged(true);
+    setArt(article);
+  }, [editorData]);
+  useEffect(() => {
+    let int: any;
+    console.log("i am in the useEffect");
+    if (article) {
+      int = setInterval(() => {
+        if (!heChanged) {
+          console.log("outed");
+          return clearInterval(int);
+        }
+        let btn: HTMLButtonElement | null =
+          document.querySelector("button.draft");
+        if (btn) {
+          btn.click();
+        }
+        console.log("saved");
+        setIsChanged(false);
+      }, 5000);
+    }
+    return () => clearInterval(int);
+  }, [heChanged, article]);
+
+  let handleUpdateDraft = async () => {
     const processedContent = await remark()
       .use(html)
       .process(editorData.markdown);
     const contentHtml = processedContent.toString();
 
-    let req = await fetch("/api/articles/article", {
+    let req = await fetch("/api/drafts", {
       method: "PUT",
       body: JSON.stringify({
         id,
-        articleData: {
+        DraftData: {
           ...editorData,
           content: contentHtml,
           slug: editorData.title.trim().replaceAll(" ", "-"),
@@ -98,12 +124,43 @@ export default function Editor({ id }: { id: string }) {
     if (!req.ok) {
       toast.error("حدث خطأ ما");
     } else {
-      toast.success("تم التعديل بنجاح");
+      let btn = document.querySelector("button.draft");
+      if (!btn) return;
+      btn.textContent = " ✅ تم الحفظ";
+      setTimeout(() => {
+        if (!btn) return;
+        btn.textContent = "حفظ التعديل كمسودة";
+      }, 5000);
+    }
+  };
+  let handlePostArticle = async () => {
+    const processedContent = await remark()
+      .use(html)
+      .process(editorData.markdown);
+    const contentHtml = processedContent.toString();
+    setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
+
+    let req = await fetch("/api/articles", {
+      method: "POST",
+      body: JSON.stringify({
+        ...editorData,
+        likes: 0,
+        content: contentHtml,
+        slug: editorData.title.trim().replaceAll(" ", "-"),
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    // let data = await req.json();
+    if (!req.ok) {
+      toast.error("حدث خطأ ما");
+    } else {
+      toast.success("تم النشر بنجاح");
       localStorage.removeItem("editorData");
       r.push("/dashboard");
     }
   };
-
   if (article === null) {
     return <Spinner />;
   }
@@ -116,7 +173,7 @@ export default function Editor({ id }: { id: string }) {
   } else {
     return (
       <div className="editor">
-        <ENAV />
+        {/* <ENAV /> */}
         <Container>
           <Header />
           <MdEditor />
@@ -155,10 +212,16 @@ export default function Editor({ id }: { id: string }) {
             </Link>
             <div className="flex gap-4">
               <button
-                onClick={handleUpdateArticle}
+                className="px-6 py-2 font-medium rounded-lg transition draft"
+                onClick={handleUpdateDraft}
+              >
+                حفظ كمسودة
+              </button>
+              <button
+                onClick={handlePostArticle}
                 className="px-8 py-2 font-medium vbg rounded-lg transition"
               >
-                تعديل المقال
+                نشر المقال
               </button>
             </div>
           </footer>

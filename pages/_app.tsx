@@ -71,7 +71,7 @@ export default function App({
               onExitComplete={() => window.scrollTo(0, 0)}
             >
               <NextProgress
-                color={BLOG.primaryColor}
+                color={BLOG.primaryColorD}
                 options={{ showSpinner: BLOG.showLoadingSpinner }}
               />
               <motion.div

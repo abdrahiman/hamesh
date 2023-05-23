@@ -117,10 +117,10 @@ html::-webkit-scrollbar-thumb {
 }
 // colors
 :root {
-  --primary-color: #6455c7;
+  --primary-color: #0f766e;
 }
 :root.dark {
-  --primary-color: #ca5386;
+  --primary-color: #2dd4bf;
 }
 ::selection {
   background: var(--primary-color);

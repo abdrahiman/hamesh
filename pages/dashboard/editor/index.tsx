@@ -40,43 +40,6 @@ export default function Editor() {
     e.preventDefault();
     e.returnValue = "";
   };
-  let handlePostArticle = async () => {
-    const processedContent = await remark()
-      .use(html)
-      .process(editorData.markdown);
-    const contentHtml = processedContent.toString();
-    setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
-
-    let req = await fetch("/api/articles", {
-      method: "POST",
-      body: JSON.stringify({
-        ...editorData,
-        likes: 0,
-        isDraft: false,
-        content: contentHtml,
-        slug: editorData.title.trim().replaceAll(" ", "-"),
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-    // let data = await req.json();
-    if (!req.ok) {
-      toast.error("حدث خطأ ما");
-    } else {
-      toast.success("تم النشر بنجاح");
-      localStorage.removeItem("editorData");
-      setEditorData({
-        title: "",
-        content: "",
-        markdown: "",
-        isDraft: true,
-        description: "",
-        coverUrl: "",
-        tags: [],
-      });
-    }
-  };
 
   let handlePostDraft = async () => {
     const processedContent = await remark()
@@ -85,12 +48,10 @@ export default function Editor() {
     const contentHtml = processedContent.toString();
     setEditorData((prv: any) => ({ ...prv, content: contentHtml }));
 
-    let req = await fetch("/api/articles", {
+    let req = await fetch("/api/drafts", {
       method: "POST",
       body: JSON.stringify({
         ...editorData,
-        likes: 0,
-        isDraft: true,
         content: contentHtml,
         slug: editorData.title.trim().replaceAll(" ", "-"),
       }),
@@ -99,16 +60,17 @@ export default function Editor() {
       },
     });
     console.log(req);
-    // let data = await req.json();
+    let data = await req.json();
     if (!req.ok) {
       toast.error("حدث خطأ ما");
     } else {
       toast.success("تم النشر بنجاح");
+      r.push("/dashboard/drafts/" + data._id);
     }
   };
   return (
     <div className="editor">
-      <ENAV />
+      {/* <ENAV /> */}
       <Container>
         <Header />
         <MdEditor />
@@ -147,16 +109,10 @@ export default function Editor() {
           </Link>
           <div className="flex gap-4">
             <button
-              className="px-6 py-2 max-md:px-6 max-md:py-0 font-medium rounded-lg transition"
               onClick={handlePostDraft}
-            >
-              احفظه كمسودة
-            </button>
-            <button
-              onClick={handlePostArticle}
               className="px-8 py-2 font-medium vbg rounded-lg transition"
             >
-              نشر المقال
+              نشر المسودة
             </button>
           </div>
         </footer>

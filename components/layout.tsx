@@ -9,7 +9,8 @@ export default function Layout({ children }: { children: any }) {
   let c =
     r.route == "/dashboard/editor" ||
     r.route == "/dashboard" ||
-    r.route == "/dashboard/editor/[id]";
+    r.route == "/dashboard/editor/[id]" ||
+    r.route == "/dashboard/drafts/[id]";
 
   return (
     <>

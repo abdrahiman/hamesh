@@ -9,13 +9,18 @@ export default async function HANDLER(
   res: NextApiResponse
 ) {
   try {
+    try {
+      await dbConnect();
+    } catch (err) {
+      return res.status(501).json({ error: err });
+    }
     if (req.method == "GET") {
-      let session = await getServerSession(req, res, authOptions);
-      try {
-        await dbConnect();
-      } catch (err) {
-        return res.status(501).json({ error: err });
+      if (req.query.all) {
+        let users = await User.find({});
+
+        return res.status(200).send({ data: users });
       }
+      let session = await getServerSession(req, res, authOptions);
       if (!session?.user?.email) {
         return res.status(404).send({ error: "session is not found" });
       }

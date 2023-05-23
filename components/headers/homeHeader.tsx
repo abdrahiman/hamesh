@@ -1,12 +1,13 @@
 import Link from "next/link";
 import React from "react";
+import BLOG from "../../BLOG.config";
 import SocailMedai from "../ui/socailMedai";
 
 function HomeHeader() {
   return (
     <header className="flex sticky px-4 flex-col mb:w-3/5 w-full md:items-start mb-6 md:mb-0 text-right">
       <main className="notion light-mode notion-page md:ml-0">
-        <h1 className="notion-text text-lg">
+        {/* <h1 className="notion-text text-lg">
           أنا عبدالرحيم أنضام، مبرمج متخصص في عالم الـ WEB 👨‍💻⚙️ :
         </h1>
         <ul className="notion-list notion-list-disc ">
@@ -17,12 +18,34 @@ function HomeHeader() {
         </ul>
         <ul className="notion-list notion-list-disc ">
           <li>أكتب أيضًا بعض المقالات، اتمنى ان تنال اعجابك </li>
-        </ul>
+        </ul> */}
+        <h1 className="text-5xl max-md:text-4xl font-extrabold mb-4 flex items-start">
+          مدونة {BLOG.ArTitle}
+          <svg
+            className="text-teal-700 dark:text-teal-400  w-10 h-10"
+            stroke="currentColor"
+            viewBox="0 0 52 52"
+          >
+            <polygon
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+              points="29 13 14 29 25 29 23 39 38 23 27 23"
+            />
+          </svg>
+        </h1>
+        <p className="leading-7 text-base">
+          الويب يعني ثقافة المشاركة، لذلك نعتقد في مدونة توتومينا بأن المعلومة
+          مهما كانت بسيطة لا يجب أن تبقى حكرا على أشخاص معينين بل يجب مشاركتها
+          مع الآخرين وبذلك نرتقي بأنفسنا وبمحتوى لغتنا العربية العزيزة على
+          الإنترنت.
+        </p>
       </main>
       <SocailMedai />
       <div className="flex flex-col  max-md:w-3/4 sm:flex-row sm:justify-center gap-4 mt-6">
         <Link href="/contact">
-          <button className="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 gap-3 inline-flex py-3 px-5 rounded-lg items-center">
+          <button className="w-full dark:bg-opacity-30 bg-gray-200 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 gap-3 inline-flex py-3 px-5 rounded-lg items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
