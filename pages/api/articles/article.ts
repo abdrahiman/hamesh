@@ -27,7 +27,7 @@ export default async function HANDLER(
         return res.status(200).send(article);
       }
       let { slug } = req.query;
-      let article = await Article.findOne({ slug, isDraft: false });
+      let article = await Article.findOne({ slug});
       if (!article) {
         return res.status(404).send({ error: "This article does not exist" });
       }

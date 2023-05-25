@@ -30,8 +30,6 @@ export default async function HANDLER(
           tags: {
             $in: tagSearch,
           },
-
-          isDraft: false,
         })
           .sort({ createdAt: -1 })
           .limit(+lm);
@@ -44,17 +42,13 @@ export default async function HANDLER(
             $regex: querySearch,
             $options: "i",
           },
-
-          isDraft: false,
         })
           .sort({ createdAt: -1 })
           .limit(+lm);
 
         return res.status(201).json({ data: articles });
       }
-      const articles = await Article.find({
-        isDraft: false,
-      })
+      const articles = await Article.find({})
         .sort({ createdAt: -1 })
         .limit(+lm);
       return res.status(201).json({ data: articles });
