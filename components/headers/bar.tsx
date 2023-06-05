@@ -56,7 +56,7 @@ export default function SearchBar({
           value={inpText}
           autoFocus
           onChange={HandleChange}
-          className="w-full bg-white dark:bg-gray-600 shadow-md rounded-lg outline-none focus:shadow p-3"
+          className="w-full bg-white dark:bg-gray-700 shadow-md rounded-lg outline-none focus:shadow p-3"
         />
         <svg
           className="absolute left-3 top-3 h-5 w-5 text-gray-400"

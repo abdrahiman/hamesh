@@ -52,7 +52,9 @@ export default async function HANDLER(
         .sort({ createdAt: -1 })
         .limit(+lm);
       return res.status(201).json({ data: articles });
-    } else if (req.method === "POST") {
+    }
+    //add a post
+    else if (req.method === "POST") {
       let articleData = req.body;
       if (articleData.coverUrl == "") {
         let image = await GenerateImage();

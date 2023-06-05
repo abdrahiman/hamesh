@@ -47,15 +47,14 @@ export default function Page() {
             articles.data.map((art: IArticle) => (
               <Post key={art._id} art={art} />
             ))}
-
-          {/* {isLoading && !articles?.data && (
+          {isLoading && !articles?.data && (
             <>
               <PostLoader />
               <PostLoader />
               <PostLoader />
               <PostLoader />
             </>
-          )}*/}
+          )}
         </main>
         {articles?.data && articles.data.length == limit && (
           <button

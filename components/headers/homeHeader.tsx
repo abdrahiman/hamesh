@@ -36,10 +36,10 @@ function HomeHeader() {
           </svg>
         </h1>
         <p className="leading-7 text-base">
-          الويب يعني ثقافة المشاركة، لذلك نعتقد في مدونة توتومينا بأن المعلومة
-          مهما كانت بسيطة لا يجب أن تبقى حكرا على أشخاص معينين بل يجب مشاركتها
-          مع الآخرين وبذلك نرتقي بأنفسنا وبمحتوى لغتنا العربية العزيزة على
-          الإنترنت.
+          الويب يعني ثقافة المشاركة، لذلك نعتقد في مدونة {BLOG.ArTitle} بأن
+          المعلومة مهما كانت بسيطة لا يجب أن تبقى حكرا على أشخاص معينين بل يجب
+          مشاركتها مع الآخرين وبذلك نرتقي بأنفسنا وبمحتوى لغتنا العربية العزيزة
+          على الإنترنت.
         </p>
       </main>
       <SocailMedai />
@@ -55,8 +55,8 @@ function HomeHeader() {
               className="inline-block text-gray-600 dark:text-gray-100 h-7 w-7 mt-1"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 strokeWidth="2"
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               ></path>

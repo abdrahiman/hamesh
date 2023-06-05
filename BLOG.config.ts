@@ -23,24 +23,22 @@ const BLOG = {
     mail: "abderrhimaneddam@gmail.com",
     password: "zzpzldwqwblnvcko",
   },
-  pagesShow: {
-    newsletter: false,
-    notes: false,
-    projects: false,
-    contact: true,
-    books: false,
-    friends: false,
-  },
-  showWeChatPay: true,
-  previewImagesEnabled: true,
+  // pagesShow: {
+  //   newsletter: false,
+  //   notes: false,
+  //   projects: false,
+  //   contact: true,
+  //   books: false,
+  //   friends: false,
+  // },
   autoCollapsedNavBar: true, // The automatically collapsed navigation bar
   pagesIcon: "/logo.svg",
   urlCover: "regular", // the quality of the auto generated image ( raw > full > regular > "")
   ogImageGenerateHost: "og-zl.vercel.app", // The link to generate OG image, don't end with a slash
   defaultCover: "/cover.jpg",
   socialLink: {
-    twitter: "https://twitter.com/imabderrahim",
-    github: "https://github.com/iabderrahim",
+    twitter: "https://twitter.com/iabdrahimz",
+    github: "https://github.com/iabdrahim",
     instagram: "https://instagram.com/iabderrahim",
   },
   RandomImagesEndPoint: `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_API}&query=nature&count=1`, //your api endpoint (unsplash,pexls...)
