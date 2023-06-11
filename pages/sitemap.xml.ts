@@ -40,7 +40,7 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   await dbConnect();
 
   // We make an API call to gather the URLs for our site
-  const posts = await Article.find({ isDraft: false });
+  const posts = await Article.find({});
   // We generate the XML sitemap with the posts data
   const sitemap = generateSiteMap(posts);
   res.statusCode = 200;
