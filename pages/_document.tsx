@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="monetag" content="48906e071f1d3c211f56167fbc09af80">
+          <meta name="monetag" content="48906e071f1d3c211f56167fbc09af80"/>
           {/* enable analytics script only for production */}
           {isProduction && (
             <>
