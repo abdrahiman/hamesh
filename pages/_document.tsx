@@ -31,7 +31,15 @@ export default class MyDocument extends Document {
           `,
                 }}
               />
-           
+             <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if ('serviceWorker' in navigator) {
+                  navigator.serviceWorker.register('/sw.js');
+                }
+              `,
+            }}
+          />
             </>
           )}
         </Head>
