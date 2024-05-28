@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script"
 
 import { GA_TRACKING_ID } from "../lib/gtag";
 
@@ -20,14 +21,18 @@ export default class MyDocument extends Document {
 		'width' : 160,
 		'params' : {}
 	};`}}></script>
-	<script type="text/javascript">
-	atOptions = {
-		'key' : 'b49ae898b3e3bd4df02e63a59c33ed33',
-		'format' : 'iframe',
-		'height' : 60,
-		'width' : 468,
-		'params' : {}
-	};</script>
+	    <Script
+      id="adsterra-script"
+      dangerouslySetInnerHTML={{__html:`
+        atOptions = {
+          'key' : '7c99d15f4cdaee69c2844907771196d',
+          'format' : 'iframe',
+          'height' : 300,
+          'width' : 160,
+          'params' : {}
+        };`}}
+      strategy="afterInteractive"
+    />
               <script type='text/javascript' async src='//pl23424574.highcpmgate.com/f1/bc/c0/f1bcc056105789d5a8d48c33abf93c75.js'></script>
               <script
                 async
