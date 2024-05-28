@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
       strategy="afterInteractive"
     />
               <script type='text/javascript' async src='//pl23424574.highcpmgate.com/f1/bc/c0/f1bcc056105789d5a8d48c33abf93c75.js'></script>
-	<script type='text/javascript' src='//dearesthydrogen.com/cd/28/aa/cd28aa19ab530882bd5405b27115636b.js'></script>
+	<script type='text/javascript' async src='//dearesthydrogen.com/cd/28/aa/cd28aa19ab530882bd5405b27115636b.js'></script>
               <script
                 async
                 src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
@@ -57,6 +57,8 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+		<script async data-cfasync="false" src="//dearesthydrogen.com/ed76727bc70e0dd9a1233b8b2a7e5823/invoke.js"></script>
+<div id="container-ed76727bc70e0dd9a1233b8b2a7e5823"></div>
           <NextScript />
         </body>
       </Html>
