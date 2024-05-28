@@ -19,9 +19,15 @@ export default class MyDocument extends Document {
 		'height' : 300,
 		'width' : 160,
 		'params' : {}
-	};`}}>
-
-              </script>
+	};`}}></script>
+	<script type="text/javascript">
+	atOptions = {
+		'key' : 'b49ae898b3e3bd4df02e63a59c33ed33',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};</script>
               <script type='text/javascript' async src='//pl23424574.highcpmgate.com/f1/bc/c0/f1bcc056105789d5a8d48c33abf93c75.js'></script>
               <script
                 async
