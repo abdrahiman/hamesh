@@ -9,11 +9,20 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="monetag" content="48906e071f1d3c211f56167fbc09af80"/>
-          {/* enable analytics script only for production */}
           {isProduction && (
             <>
-              <script src="https://alwingulla.com/88/tag.min.js" data-zone="63711" async data-cfasync="false"></script>
+              <script type="text/javascript"
+                dangerouslySetInnerHTML={{__html:`
+                	atOptions = {
+		'key' : '7c99d15f4cdaee69c28449077771196d',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};`}}>
+
+              </script>
+              <script type='text/javascript' src='//pl23424574.highcpmgate.com/f1/bc/c0/f1bcc056105789d5a8d48c33abf93c75.js'></script>
               <script
                 async
                 src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
@@ -31,15 +40,6 @@ export default class MyDocument extends Document {
           `,
                 }}
               />
-             <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                if ('serviceWorker' in navigator) {
-                  navigator.serviceWorker.register('/sw.js');
-                }
-              `,
-            }}
-          />
             </>
           )}
         </Head>
